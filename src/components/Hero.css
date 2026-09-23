@@ -1,0 +1,234 @@
+/* =========================
+   HERO SECTION (CLEAN + CURTAIN OPENING)
+========================= */
+
+.hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-color: #15161b;
+  overflow: hidden;
+  position: relative;
+}
+
+/* =========================
+   CURTAIN OPENING EFFECT
+========================= */
+
+/* Ye do curtains hain jo page load hote hi khul jayenge */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #454444; /* Dark curtain color */
+  z-index: 100;
+  pointer-events: none;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Left Curtain */
+.hero::before {
+  left: 0;
+  transform-origin: left;
+  animation: curtainLeft 1.4s cubic-bezier(0.77, 0, 0.175, 1) 0.2s forwards;
+}
+
+/* Right Curtain */
+.hero::after {
+  right: 0;
+  transform-origin: right;
+  animation: curtainRight 1.4s cubic-bezier(0.77, 0, 0.175, 1) 0.2s forwards;
+}
+
+/* Left Curtain Animation (Left se bahar) */
+@keyframes curtainLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Right Curtain Animation (Right se bahar) */
+@keyframes curtainRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* =========================
+   LEFT SIDE (TEXT)
+========================= */
+
+.hero-left {
+  width: 52%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 3px #00ff00;
+  font-size: 85px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 2px;
+  /* Text entry animation (Curtain khulne ke baad) */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: textReveal 0.8s ease-out 1.4s forwards;
+}
+
+.hero-left h1 {
+  color: white;
+  font-size: 85px;
+  font-weight: 900;
+  line-height: 0.95;
+  margin-top: 30px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: textReveal 0.8s ease-out 1.6s forwards;
+}
+
+@keyframes textReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RIGHT SIDE (VIDEO - CLEAN)
+========================= */
+
+.hero-right {
+  width: 48%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Video entry animation (Curtain khulne ke baad) */
+  opacity: 0;
+  transform: scale(1.05);
+  animation: videoReveal 1s ease-out 1.4s forwards;
+}
+
+@keyframes videoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   VIDEO STYLING (NO BORDER, NO GLOW)
+========================= */
+
+.hero-right video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  /* Bilkul saaf video, koi filter nahi */
+  transition: transform 0.6s ease;
+}
+
+/* Hover par halka sa zoom (Optional) */
+.hero-right:hover video {
+  transform: scale(1.02);
+}
+
+/* =========================
+   JOIN BOX (Bottom Center)
+========================= */
+
+.join-box {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  background-color: white;
+  padding: 22px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #111;
+  z-index: 2;
+  transition: all 0.4s ease;
+  /* Join box entry */
+  opacity: 0;
+  animation: textReveal 0.8s ease-out 2s forwards;
+}
+
+.join-box:hover {
+  background-color: #00ff00;
+  box-shadow: 0 0 15px #00ff00, 0 0 30px rgba(0, 255, 0, 0.6);
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.arrow {
+  font-size: 35px;
+  transition: transform 0.4s ease;
+}
+
+.join-box:hover .arrow {
+  transform: translateX(8px);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .hero-left {
+    width: 100%;
+    min-height: 500px;
+    padding: 60px 20px;
+  }
+
+  .hero-right {
+    width: 100%;
+    height: 600px;
+  }
+
+  .hero-right video {
+    object-position: center 65%;
+  }
+
+  .outline-text {
+    font-size: 60px;
+  }
+
+  .hero-left h1 {
+    font-size: 60px;
+  }
+}
