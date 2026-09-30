@@ -232,3 +232,727 @@
     font-size: 60px;
   }
 }
+/* =========================================================
+   KINETIX HERO - ULTRA PREMIUM MOTION LAYER
+   Paste at the VERY END of Hero.css
+========================================================= */
+
+
+/* =========================================================
+   1. CINEMATIC GRID / TECH BACKGROUND
+========================================================= */
+
+.hero {
+  background:
+    linear-gradient(
+      rgba(0, 255, 0, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 255, 0, 0.025) 1px,
+      transparent 1px
+    ),
+    #080a0b;
+
+  background-size: 70px 70px;
+}
+
+
+/* Moving grid */
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+  inset: -100px;
+
+  background:
+    linear-gradient(
+      rgba(0, 255, 0, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 255, 0, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 90px 90px;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation: gridMove 12s linear infinite;
+}
+
+
+/* =========================================================
+   2. GIANT MOVING GREEN GLOW
+========================================================= */
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 700px;
+  height: 700px;
+
+  left: 5%;
+  top: 10%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 255, 0, 0.12),
+      rgba(0, 255, 0, 0.035) 35%,
+      transparent 70%
+    );
+
+  filter: blur(35px);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation: giantGlow 9s ease-in-out infinite alternate;
+}
+
+
+/* =========================================================
+   3. DIAGONAL LIGHT STREAK
+========================================================= */
+
+.hero-left {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.hero-left .outline-text::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 600px;
+
+  top: -120px;
+  left: -250px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 255, 0, 0.16),
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+
+  transform: rotate(20deg);
+
+  filter: blur(12px);
+
+  pointer-events: none;
+
+  animation: diagonalSweep 6s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   4. BIG OUTLINE TEXT BREATHING
+========================================================= */
+
+.outline-text {
+  animation:
+    textReveal 0.8s ease-out 1.4s forwards,
+    massiveTextGlow 5s ease-in-out 2s infinite,
+    textBreathing 6s ease-in-out infinite;
+}
+
+
+@keyframes textBreathing {
+
+  0%,
+  100% {
+    transform: scale(1);
+    letter-spacing: normal;
+  }
+
+  50% {
+    transform: scale(1.025);
+    letter-spacing: 2px;
+  }
+}
+
+
+/* =========================================================
+   5. TEXT GLITCH EFFECT
+========================================================= */
+
+.hero-left h1 {
+  position: relative;
+}
+
+
+.hero-left h1::before,
+.hero-left h1::after {
+  content: attr(data-text);
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+.hero-left h1::before {
+  color: #00ff00;
+
+  transform: translate(2px, -1px);
+
+  animation: glitchOne 5s infinite;
+}
+
+
+.hero-left h1::after {
+  color: white;
+
+  transform: translate(-2px, 1px);
+
+  animation: glitchTwo 5s infinite;
+}
+
+
+@keyframes glitchOne {
+
+  0%,
+  88%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+
+  89% {
+    opacity: 0.7;
+    clip-path: inset(15% 0 70% 0);
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  91% {
+    opacity: 0.5;
+    clip-path: inset(60% 0 20% 0);
+  }
+
+  92% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes glitchTwo {
+
+  0%,
+  91%,
+  100% {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  92% {
+    opacity: 0.6;
+    clip-path: inset(35% 0 45% 0);
+  }
+
+  93% {
+    opacity: 0;
+  }
+
+  94% {
+    opacity: 0.5;
+    clip-path: inset(75% 0 10% 0);
+  }
+
+  95% {
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   6. VIDEO BORDER SCANNER
+========================================================= */
+
+.hero-right {
+  overflow: hidden;
+}
+
+
+.hero-right::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.45),
+      transparent 35%,
+      rgba(0, 255, 0, 0.06)
+    );
+
+  animation:
+    videoOverlay 4s ease-in-out infinite alternate,
+    videoColorPulse 7s ease-in-out infinite;
+}
+
+
+@keyframes videoColorPulse {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.08);
+  }
+}
+
+
+/* =========================================================
+   7. MULTIPLE SCAN LINES
+========================================================= */
+
+.hero-right::before {
+  height: 2px;
+
+  box-shadow:
+    0 0 8px #00ff00,
+    0 0 20px rgba(0, 255, 0, 0.8),
+    0 0 50px rgba(0, 255, 0, 0.3);
+}
+
+
+/* =========================================================
+   8. VIDEO ZOOM + MICRO MOVEMENT
+========================================================= */
+
+@keyframes heroVideoZoom {
+
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.025) translate(-3px, -2px);
+  }
+
+  50% {
+    transform: scale(1.045) translate(2px, 1px);
+  }
+
+  75% {
+    transform: scale(1.025) translate(-1px, 2px);
+  }
+
+  100% {
+    transform: scale(1.06) translate(3px, -1px);
+  }
+}
+
+
+/* =========================================================
+   9. FLOATING GREEN PARTICLES
+========================================================= */
+
+.hero-left::after {
+
+  width: 4px;
+  height: 4px;
+
+  box-shadow:
+    0 0 8px #00ff00,
+    0 0 20px #00ff00,
+    120px 80px 0 1px #00ff00,
+    250px -60px 0 0 #00ff00,
+    350px 180px 0 1px #00ff00,
+    80px 300px 0 0 #00ff00;
+
+  animation:
+    heroParticle1 5s ease-in-out infinite,
+    particlesBlink 3s ease-in-out infinite alternate;
+}
+
+
+@keyframes particlesBlink {
+
+  0% {
+    filter: brightness(0.5);
+  }
+
+  100% {
+    filter: brightness(2);
+  }
+}
+
+
+/* =========================================================
+   10. JOIN BUTTON MAGNETIC FEEL
+========================================================= */
+
+.join-box {
+  position: relative;
+
+  transition:
+    transform 0.4s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.4s ease;
+}
+
+
+.join-box:hover {
+
+  transform:
+    translateX(8px)
+    scale(1.025);
+
+  box-shadow:
+    0 15px 45px rgba(0, 255, 0, 0.2),
+    0 0 35px rgba(0, 255, 0, 0.12);
+}
+
+
+/* =========================================================
+   11. BUTTON BORDER RUNNER
+========================================================= */
+
+.join-box::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border: 1px solid rgba(0, 255, 0, 0.35);
+
+  pointer-events: none;
+
+  clip-path:
+    polygon(
+      0 0,
+      0 0,
+      0 0,
+      0 0
+    );
+
+  animation: borderRunner 4s linear infinite;
+}
+
+
+@keyframes borderRunner {
+
+  0% {
+    clip-path:
+      polygon(
+        0 0,
+        0 0,
+        0 0,
+        0 0
+      );
+  }
+
+  25% {
+    clip-path:
+      polygon(
+        0 0,
+        100% 0,
+        100% 3px,
+        0 3px
+      );
+  }
+
+  50% {
+    clip-path:
+      polygon(
+        97% 0,
+        100% 0,
+        100% 100%,
+        97% 100%
+      );
+  }
+
+  75% {
+    clip-path:
+      polygon(
+        0 97%,
+        100% 97%,
+        100% 100%,
+        0 100%
+      );
+  }
+
+  100% {
+    clip-path:
+      polygon(
+        0 0,
+        3px 0,
+        3px 100%,
+        0 100%
+      );
+  }
+}
+
+
+/* =========================================================
+   12. ARROW STRONG MOTION
+========================================================= */
+
+.join-box:hover .arrow {
+
+  transform:
+    translateX(14px)
+    scale(1.25);
+
+  filter:
+    drop-shadow(0 0 8px #00ff00);
+}
+
+
+.arrow {
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+
+/* =========================================================
+   13. CINEMATIC VIGNETTE
+========================================================= */
+
+.hero {
+  box-shadow:
+    inset 0 0 180px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =========================================================
+   14. GREEN HORIZONTAL ENERGY LINE
+========================================================= */
+
+.hero-left h1::after {
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #00ff00,
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px #00ff00;
+
+  animation:
+    energyLine 3s ease-in-out infinite;
+}
+
+
+@keyframes energyLine {
+
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  30% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  60% {
+    width: 100%;
+    opacity: 0.7;
+  }
+
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   15. GRID MOVEMENT
+========================================================= */
+
+@keyframes gridMove {
+
+  0% {
+    transform:
+      translate(0, 0);
+  }
+
+  100% {
+    transform:
+      translate(70px, 70px);
+  }
+}
+
+
+/* =========================================================
+   16. GIANT GLOW MOVEMENT
+========================================================= */
+
+@keyframes giantGlow {
+
+  0% {
+    transform:
+      translate(-80px, 0)
+      scale(0.9);
+
+    opacity: 0.4;
+  }
+
+  50% {
+    transform:
+      translate(120px, -50px)
+      scale(1.15);
+
+    opacity: 0.8;
+  }
+
+  100% {
+    transform:
+      translate(250px, 100px)
+      scale(1.3);
+
+    opacity: 0.4;
+  }
+}
+
+
+/* =========================================================
+   17. DIAGONAL SWEEP
+========================================================= */
+
+@keyframes diagonalSweep {
+
+  0% {
+    left: -250px;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  60% {
+    left: 120%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   18. MASSIVE TEXT GLOW
+========================================================= */
+
+@keyframes massiveTextGlow {
+
+  0%,
+  100% {
+
+    text-shadow:
+      0 0 5px rgba(0, 255, 0, 0.08),
+      0 0 15px rgba(0, 255, 0, 0.04);
+  }
+
+  50% {
+
+    text-shadow:
+      0 0 12px rgba(0, 255, 0, 0.4),
+      0 0 35px rgba(0, 255, 0, 0.18),
+      0 0 70px rgba(0, 255, 0, 0.08);
+  }
+}
+
+
+/* =========================================================
+   19. MOUSE HOVER VIDEO
+========================================================= */
+
+.hero-right:hover {
+
+  box-shadow:
+    inset 3px 0 0 rgba(0, 255, 0, 0.7),
+    inset 0 0 50px rgba(0, 255, 0, 0.08),
+    0 0 30px rgba(0, 255, 0, 0.08);
+}
+
+
+/* =========================================================
+   20. MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero::before {
+    background-size: 50px 50px;
+    animation-duration: 18s;
+  }
+
+  .hero::after {
+    width: 450px;
+    height: 450px;
+  }
+
+  .hero-left h1::before,
+  .hero-left h1::after {
+    display: none;
+  }
+
+  .hero-left .outline-text::before {
+    display: none;
+  }
+
+  .join-box:hover {
+    transform: translateX(4px) scale(1.01);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero *,
+  .hero::before,
+  .hero::after,
+  .hero-left::before,
+  .hero-left::after,
+  .hero-right::before,
+  .hero-right::after,
+  .outline-text::before,
+  .join-box::before,
+  .join-box::after {
+
+    animation: none !important;
+  }
+}

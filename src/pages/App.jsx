@@ -9,6 +9,7 @@ import Login2 from "../components/Login2";
 import Login3 from "../components/Login3";
 import Login4 from "../components/Login4";
 import About from "../components/About";
+import Membership from "../components/Membership";
 
 
 
@@ -19,9 +20,9 @@ function Home() {
       <Hero />
       <Marquee /> 
       <GymShowcase />
-      
       <About />
-       <Marquee /> 
+      <Membership />
+      <Marquee /> 
       <Footer />
       {/* <Login1 /> 
       <Login2 />

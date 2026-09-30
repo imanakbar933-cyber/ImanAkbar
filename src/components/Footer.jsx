@@ -79,7 +79,7 @@ function Footer() {
         <div className="footer-brand">
 
           <h2>
-            GYM<span>FREAK</span>
+            KIN<span>ETIX</span>
           </h2>
 
           <p className="footer-slogan">
@@ -87,7 +87,7 @@ function Footer() {
           </p>
 
           <p className="footer-description">
-            GYMFREAK is more than a gym.
+            KINETIX is more than a gym.
             It is a place where consistency,
             strength and dedication become
             a lifestyle.
@@ -111,7 +111,7 @@ function Footer() {
 
         <div className="footer-column">
 
-          <h3>Quick Link</h3>
+          <h3>Quick Links</h3>
 
           <div className="footer-title-line"></div>
 
@@ -129,7 +129,7 @@ function Footer() {
 
         <div className="footer-column">
 
-          <h3>Our Service</h3>
+          <h3>Our Services</h3>
 
           <div className="footer-title-line"></div>
 
@@ -157,7 +157,7 @@ function Footer() {
 
             <div>
               <strong>Gujranwala, Pakistan</strong>
-              <small>GYMFREAK Main Branch</small>
+              <small>KINETIX Main Branch</small>
             </div>
           </div>
 
@@ -176,7 +176,7 @@ function Footer() {
             <span className="contact-icon">✉</span>
 
             <div>
-              <strong>info@gymfreak.com</strong>
+              <strong>info@kinetix.com</strong>
               <small>Send us an email</small>
             </div>
           </div>
