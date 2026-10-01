@@ -21,7 +21,7 @@ function Home() {
       <Marquee /> 
       <GymShowcase />
       <About />
-      <Membership />
+      {/* <Membership /> */}
       <Marquee /> 
       <Footer />
       {/* <Login1 /> 

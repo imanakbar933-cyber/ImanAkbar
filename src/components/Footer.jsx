@@ -205,7 +205,7 @@ function Footer() {
         </div>
 
         <p>
-          © 2026 <span>GYMFREAK</span> Fitness Center.
+          © 2026 <span>KINETIX</span> Fitness Center.
           All rights reserved.
         </p>
 

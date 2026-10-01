@@ -9,46 +9,46 @@ function Membership() {
   const monthlyPlans = [
     {
       name: "BASIC MEMBERSHIP",
-      price: "$45",
+      price: "PKR4500",
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "$85",
+      price: "PKR8500",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "$119",
+      price: "PKR11000",
     },
     {
       name: "FAMILY MEMBERSHIP",
-      price: "$229",
+      price: "PKR22000",
     },
     {
       name: "VIP MEMBERSHIP",
-      price: "$289",
+      price: "PKR28000",
     },
   ];
 
   const yearlyPlans = [
     {
       name: "BASIC MEMBERSHIP",
-      price: "$450",
+      price: "PKR4500",
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "$850",
+      price: "PKR8500",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "$1190",
+      price: "PKR11000",
     },
     {
       name: "FAMILY MEMBERSHIP",
-      price: "$2290",
+      price: "PKR22000",
     },
     {
       name: "VIP MEMBERSHIP",
-      price: "$2890",
+      price: "PKR28000",
     },
   ];
 

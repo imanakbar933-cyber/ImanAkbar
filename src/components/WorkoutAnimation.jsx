@@ -1,89 +1,188 @@
+import { useEffect, useRef } from "react";
 import "./WorkoutAnimation.css";
 
 function WorkoutAnimation() {
-  return (
-    <section className="workout-animation">
 
-      {/* Background text */}
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+
+    const section = animationRef.current;
+
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            // Animation reset
+            section.classList.remove("play-animation");
+
+            // Browser ko reset process complete karne ka time
+            void section.offsetWidth;
+
+            // Animation dobara start
+            section.classList.add("play-animation");
+
+          } else {
+
+            // Section screen se bahar ho to class remove
+            section.classList.remove("play-animation");
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.35
+      }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+
+  }, []);
+
+
+  return (
+
+    <section
+      ref={animationRef}
+      className="workout-animation"
+    >
+
+      {/* =================================================
+          BACKGROUND TEXT
+      ================================================= */}
+
       <div className="workout-bg-text">
-        TRAIN
+        KINETIX
       </div>
 
-      {/* Dumbbells falling */}
+
+      {/* =================================================
+          FALLING DUMBBELLS
+      ================================================= */}
+
       <div className="falling-dumbbells">
 
-        <div className="falling-dumbbell dumbbell-1">
+        <span className="falling-dumbbell dumbbell-1">
           🏋️
-        </div>
+        </span>
 
-        <div className="falling-dumbbell dumbbell-2">
+        <span className="falling-dumbbell dumbbell-2">
           🏋️
-        </div>
+        </span>
 
-        <div className="falling-dumbbell dumbbell-3">
+        <span className="falling-dumbbell dumbbell-3">
           🏋️
-        </div>
+        </span>
+
+        <span className="falling-dumbbell dumbbell-4">
+          🏋️
+        </span>
+
+        <span className="falling-dumbbell dumbbell-5">
+          🏋️
+        </span>
+
+        <span className="falling-dumbbell dumbbell-6">
+          🏋️
+        </span>
+
+        <span className="falling-dumbbell dumbbell-7">
+          🏋️
+        </span>
+
+        <span className="falling-dumbbell dumbbell-8">
+          🏋️
+        </span>
 
       </div>
 
-      {/* Cartoon Character */}
+
+      {/* =================================================
+          CARTOON FITNESS CHARACTER
+      ================================================= */}
+
       <div className="fitness-character">
 
-        {/* Head */}
         <div className="character-head">
+
           <div className="eye eye-left"></div>
+
           <div className="eye eye-right"></div>
+
           <div className="character-mouth"></div>
+
         </div>
 
-        {/* Body */}
+
         <div className="character-body"></div>
 
-        {/* Left Arm */}
+
         <div className="character-arm arm-left">
+
           <div className="character-hand"></div>
+
         </div>
 
-        {/* Right Arm */}
+
         <div className="character-arm arm-right">
+
           <div className="character-hand"></div>
+
         </div>
 
-        {/* Legs */}
+
         <div className="character-leg leg-left"></div>
+
         <div className="character-leg leg-right"></div>
 
-        {/* Dumbbells */}
-        <div className="character-dumbbell dumbbell-left">
-          <span></span>
-        </div>
 
-        <div className="character-dumbbell dumbbell-right">
-          <span></span>
-        </div>
+        <div className="character-dumbbell dumbbell-left"></div>
+
+        <div className="character-dumbbell dumbbell-right"></div>
 
       </div>
 
-      {/* Ground */}
+
+      {/* =================================================
+          GROUND
+      ================================================= */}
+
       <div className="workout-ground"></div>
 
-      {/* Text */}
+
+      {/* =================================================
+          CAPTION
+      ================================================= */}
+
       <div className="workout-caption">
 
-        <span>— — — — — —  — PUSH YOUR LIMITS</span>
+        <span>
+          TRAIN HARD
+        </span>
 
         <h3>
-          MOVE.
+          BUILD YOUR
           <br />
-          <strong>BUILD.</strong>
-          <br />
-          REPEAT.
+          <strong>POWER.</strong>
         </h3>
 
       </div>
 
     </section>
+
   );
+
 }
 
 export default WorkoutAnimation;

@@ -4,10 +4,22 @@ function Hero() {
   return (
     <section className="hero">
 
+      {/* =========================
+          CURTAIN OPENING
+      ========================= */}
+
+      <div className="curtain curtain-left"></div>
+      <div className="curtain curtain-right"></div>
+
+
+      {/* =========================
+          LEFT SIDE
+      ========================= */}
+
       <div className="hero-left">
 
         <div className="outline-text">
-        <br/>
+          <br />
           GET FIT
         </div>
 
@@ -19,18 +31,22 @@ function Hero() {
           KINETIX
           <br />
           FITNESS
-          <br/>
+          <br />
           CLUB
-        
         </h1>
 
       </div>
+
+
+      {/* =========================
+          RIGHT SIDE
+      ========================= */}
 
       <div className="hero-right">
 
         <video
           src="/images/gym-video.mp4"
-           autoPlay
+          autoPlay
           loop
           muted
           playsInline
