@@ -1,6 +1,6 @@
-import Navbar from "../components/Navbar";
+
 import Hero from "../components/Hero";
-import Marquee from "../components/Marquee";
+import Headlines from "../components/Headlines";
 import GymShowcase from "../components/GymShowcase";
 import Footer from "../components/Footer";
 import Login1 from "../components/Login1";
@@ -16,13 +16,13 @@ import Membership from "../components/Membership";
 function Home() {
   return (
     <>
-      <Navbar />
+      
       <Hero />
-      <Marquee /> 
+      <Headlines /> 
       <GymShowcase />
       <About />
       {/* <Membership /> */}
-      <Marquee /> 
+      <Headlines /> 
       <Footer />
       {/* <Login1 /> 
       <Login2 />

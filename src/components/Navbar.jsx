@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
@@ -27,9 +28,10 @@ function Navbar() {
       <div className="navbar-container">
 
         {/* LOGO */}
-        <a href="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo">
           <div className="logo-icon">
             <span>K</span>
+
             <svg
               className="dumbbell-icon"
               viewBox="0 0 24 24"
@@ -51,15 +53,22 @@ function Navbar() {
             <span className="logo-main">KINETIX</span>
             <span className="logo-sub">FITNESS CLUB</span>
           </div>
-        </a>
+        </Link>
 
         {/* NAVIGATION */}
         <nav className={`navbar-menu ${menuOpen ? "menu-open" : ""}`}>
 
-          <a href="/" className="nav-link">Home</a>
-          <a href="#about" className="nav-link">About</a>
+          {/* HOME */}
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
 
-          {/* SERVICES DROPDOWN (now contains Pages items) */}
+          {/* ABOUT */}
+          <Link to="/about" className="nav-link">
+            About
+          </Link>
+
+          {/* SERVICES DROPDOWN */}
           <div className="nav-item-dropdown">
             <button
               className="nav-link dropdown-toggle"
@@ -68,26 +77,56 @@ function Navbar() {
               Services <span className="dropdown-arrow">▼</span>
             </button>
 
-            <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
-             
-              <a href="#team" className="dropdown-item">Team</a>
-              <a href="#classroom" className="dropdown-item">Classroom</a>
-              <a href="#gallery" className="dropdown-item">Gallery</a>
-              <a href="#faq" className="dropdown-item">FAQ</a>
-              <a href="#schedules" className="dropdown-item">Schedules</a>
+            <div
+              className={`dropdown-menu ${
+                dropdownOpen ? "show" : ""
+              }`}
+            >
+              <a href="#team" className="dropdown-item">
+                Team
+              </a>
+
+              <a href="#classroom" className="dropdown-item">
+                Classroom
+              </a>
+
+              <a href="#gallery" className="dropdown-item">
+                Gallery
+              </a>
+
+              <a href="#faq" className="dropdown-item">
+                FAQ
+              </a>
+
+              <a href="#schedules" className="dropdown-item">
+                Schedules
+              </a>
             </div>
           </div>
 
-          <a href="#trainers" className="nav-link">Trainers</a>
-          <a href="#membership" className="nav-link">Membership</a>
-          <a href="#contact" className="nav-link">Contact</a>
+          {/* OTHER NAV LINKS */}
+          <a href="#trainers" className="nav-link">
+            Trainers
+          </a>
+
+          <a href="#membership" className="nav-link">
+            Membership
+          </a>
+
+          <a href="#contact" className="nav-link">
+            Contact
+          </a>
 
           {/* MOBILE JOIN BUTTON */}
-          <a href="#membership" className="mobile-join">Join Us</a>
+          <a href="#membership" className="mobile-join">
+            Join Us
+          </a>
         </nav>
 
         {/* RIGHT SIDE */}
         <div className="navbar-right">
+
+          {/* JOIN BUTTON */}
           <a href="#membership" className="join-button">
             <span>Join Us</span>
             <span className="join-arrow">↗</span>
@@ -101,6 +140,7 @@ function Navbar() {
             <span></span>
             <span></span>
           </button>
+
         </div>
 
       </div>
