@@ -21,7 +21,7 @@ function Home() {
       <Headlines /> 
       <GymShowcase />
       <About />
-      {/* <Membership /> */}
+      <Membership />
       <Headlines /> 
       <Footer />
       {/* <Login1 /> 
