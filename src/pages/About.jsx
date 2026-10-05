@@ -1,6 +1,7 @@
 import AboutHero from "../components/AboutHero";
 import InfoCard from "../components/InfoCards";
 import OurStory from "../components/OurStory";
+import Trainers from "../components/Trainers";
 
 function About() {
   return (
@@ -8,6 +9,7 @@ function About() {
       <AboutHero />
       <OurStory />
       <InfoCard />
+      <Trainers />
       {/* baqi About components yahan call honge */}
     </>
   );
