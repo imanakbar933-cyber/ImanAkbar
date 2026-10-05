@@ -1,43 +1,44 @@
-import React from "react";
 import "./AboutHero.css";
 
-const AboutHero = () => {
+function AboutHero() {
   return (
     <section className="about-hero">
 
-      {/* BACKGROUND VIDEO */}
+      {/* ===== BACKGROUND VIDEO ===== */}
       <video
         className="about-hero-video"
+        src="/images/About.mp4"
         autoPlay
-        muted
         loop
+        muted
         playsInline
         preload="auto"
-      >
-        <source
-          src="https://cdn.coverr.co/videos/coverr-a-woman-working-out-1572/1080p.mp4"
-          type="video/mp4"
-        />
-      </video>
+      />
 
-      {/* DARK OVERLAY */}
+      {/* ===== DARK OVERLAY ===== */}
       <div className="about-hero-overlay"></div>
 
-      {/* CONTENT */}
+      {/* ===== GREEN GLOW BLOBS ===== */}
+      <div className="about-hero-glow glow-1"></div>
+      <div className="about-hero-glow glow-2"></div>
+
+      {/* ===== LIGHT SWEEP ===== */}
+      <div className="about-hero-sweep"></div>
+
+      {/* ===== HERO CONTENT ===== */}
       <div className="about-hero-content">
 
-        <h1 className="about-title">
-          ABOUT
-        </h1>
+        {/* Accent Line */}
+        <span className="about-hero-accent"></span>
 
-        {/* <p className="about-breadcrumb">
-          HOME <span>/</span> ABOUT
-        </p> */}
+        <h1 className="about-title">
+          <span className="word">ABOUT</span>
+        </h1>
 
       </div>
 
     </section>
   );
-};
+}
 
 export default AboutHero;

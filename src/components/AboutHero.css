@@ -4,18 +4,15 @@
 
 .about-hero {
   position: relative;
-
   width: 100%;
-  height: 620px;
-
+  height: 400px;                 /* thoda chota kiya */
+  margin-top: 80px;             /* navbar ke nicha gap */
   overflow: hidden;
-
-  background: #080a0b;
-
+  background: #000;
   display: flex;
-  align-items: center;
+  align-items: center;           /* vertical center */
+  isolation: isolate;
 }
-
 
 /* =========================================================
    BACKGROUND VIDEO
@@ -23,346 +20,264 @@
 
 .about-hero-video {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
+  object-position: center;
   z-index: 0;
-
-  filter:
-    brightness(0.58)
-    contrast(1.05);
-
-  transform: scale(1.03);
-
-  animation: videoZoom 12s ease-in-out infinite alternate;
+  filter: brightness(1.3) contrast(1.08) saturate(1.05);
+  transform: scale(1.05);
+  animation: videoZoom 14s ease-in-out infinite alternate;
 }
-
 
 @keyframes videoZoom {
-
-  from {
-    transform: scale(1.03);
-  }
-
-  to {
-    transform: scale(1.08);
-  }
-
+  0%   { transform: scale(1.05); }
+  100% { transform: scale(1.12); }
 }
 
-
 /* =========================================================
-   DARK OVERLAY
+   DARK OVERLAY (Left greenish-dark → Right light)
 ========================================================= */
 
 .about-hero-overlay {
   position: absolute;
-
   inset: 0;
-
   z-index: 1;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.72) 0%,
-      rgba(0, 0, 0, 0.35) 55%,
-      rgba(0, 0, 0, 0.30) 100%
-    );
-
+  background: linear-gradient(
+    90deg,
+    rgba(0, 20, 0, 0.78) 0%,
+    rgba(0, 10, 0, 0.55) 35%,
+    rgba(0, 0, 0, 0.25) 70%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
 }
 
+/* =========================================================
+   GREEN GLOW BLOBS
+========================================================= */
+
+.about-hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+}
+
+.glow-1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: -120px;
+  background: radial-gradient(circle, rgba(3, 234, 4, 0.5), transparent 70%);
+  animation: floatGlow1 9s ease-in-out infinite;
+}
+
+.glow-2 {
+  width: 240px;
+  height: 240px;
+  bottom: -80px;
+  left: 30%;
+  background: radial-gradient(circle, rgba(3, 234, 4, 0.3), transparent 70%);
+  animation: floatGlow2 11s ease-in-out infinite;
+}
+
+@keyframes floatGlow1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(30px, -20px) scale(1.15); }
+}
+
+@keyframes floatGlow2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-40px, 20px) scale(1.2); }
+}
+
+/* =========================================================
+   LIGHT SWEEP
+========================================================= */
+
+.about-hero-sweep {
+  position: absolute;
+  top: 0;
+  left: -25%;
+  width: 14%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  transform: skewX(-14deg);
+  animation: sweepMove 7s ease-in-out infinite;
+}
+
+@keyframes sweepMove {
+  0%   { left: -25%; }
+  50%  { left: 110%; }
+  100% { left: 110%; }
+}
 
 /* =========================================================
    HERO CONTENT
 ========================================================= */
 
 .about-hero-content {
-
   position: relative;
-
-  z-index: 2;
-
+  z-index: 3;
   width: 92%;
-
   max-width: 1400px;
-
   margin: 0 auto;
-
-  padding-top: 80px;
-
+  padding-top: 40px;              /* thoda nicha */
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-start;
 }
 
+/* =========================================================
+   GREEN ACCENT LINE
+========================================================= */
+
+.about-hero-accent {
+  display: block;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #03ea04, transparent);
+  border-radius: 3px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 18px rgba(3, 234, 4, 0.7);
+  animation: accentIn 1s ease-out 0.1s forwards;
+}
+
+@keyframes accentIn {
+  0%   { width: 0; opacity: 0; }
+  100% { width: 55px; opacity: 1; }
+}
 
 /* =========================================================
-   ABOUT
+   ABOUT TITLE (Chota kiya)
+========================================================= */
+
+/* =========================================================
+   ABOUT TITLE — LATEST ANIMATIONS
 ========================================================= */
 
 .about-title {
-
   margin: 0;
-
-  color: #03ea04;
-
-  font-family:
-    Times New Roman,
-    Helvetica,
-    sans-serif;
-
-  font-size: 40px;
-
+  display: inline-flex;
+  gap: 4px;
+  color: #ffffff;
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 42px;
   font-weight: 700;
-
   line-height: 1;
-
-  letter-spacing: -1px;
-
+  letter-spacing: 1px;
   text-transform: uppercase;
+  perspective: 800px;              /* 3D ke liye */
+  cursor: default;
+}
 
+/* ---------- Har Letter ---------- */
+
+.about-title .letter {
+  display: inline-block;
+  position: relative;
   opacity: 0;
+  transform: translateY(120%) rotateX(-90deg);
+  transform-origin: bottom center;
+  filter: blur(8px);
 
-  transform: translateX(-35px);
+  animation: letterReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(0.25s + (var(--i) * 0.09s));
 
-  animation:
-    aboutTitleIn 0.9s
-    ease-out
-    forwards;
-
-  animation-delay: 0.2s;
+  transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.35s ease;
 }
 
-
-@keyframes aboutTitleIn {
-
-  0% {
-    opacity: 0;
-
-    transform:
-      translateX(-35px);
-  }
-
-  100% {
-    opacity: 1;
-
-    transform:
-      translateX(0);
-  }
-
-}
-
-
-/* =========================================================
-   BREADCRUMB
-========================================================= */
-
-.about-breadcrumb {
-
-  margin:
-
-    42px
-
-    0
-
-    0;
-
-  color:
-
-    rgba(
-      255,
-      255,
-      255,
-      0.68
-    );
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  font-size: 18px;
-
-  font-weight: 500;
-
-  letter-spacing: 0.5px;
-
-  text-transform: uppercase;
-
-  opacity: 0;
-
-  transform: translateY(20px);
-
-  animation:
-    breadcrumbIn 0.9s
-    ease-out
-    forwards;
-
-  animation-delay: 0.45s;
-}
-
-
-/* GREEN SLASH */
-
-.about-breadcrumb span {
-
-  color: #03ea04;
-
-  margin:
-    0 8px;
-
-  font-weight: 700;
-}
-
-
-/* =========================================================
-   BREADCRUMB ANIMATION
-========================================================= */
-
-@keyframes breadcrumbIn {
-
-  0% {
-    opacity: 0;
-
-    transform:
-      translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-
-}
-
-
-/* =========================================================
-   SUBTLE LIGHT MOVEMENT
-========================================================= */
-
-.about-hero::after {
-
+/* Har letter pe glow pulse */
+.about-title .letter::after {
   content: "";
-
   position: absolute;
-
-  top: 0;
-
-  left: -20%;
-
-  width: 12%;
-
-  height: 100%;
-
-  z-index: 2;
-
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(3, 234, 4, 0.6) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   pointer-events: none;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.035),
-      transparent
-    );
-
-  transform: skewX(-12deg);
-
-  animation:
-    lightMove 8s
-    ease-in-out
-    infinite;
+  animation: shineSweep 3.5s ease-in-out infinite;
+  animation-delay: calc(1.2s + (var(--i) * 0.15s));
 }
 
-
-@keyframes lightMove {
-
+/* Letter reveal */
+@keyframes letterReveal {
   0% {
-    left: -20%;
+    opacity: 0;
+    transform: translateY(120%) rotateX(-90deg);
+    filter: blur(8px);
   }
-
-  45% {
-    left: 110%;
+  60% {
+    opacity: 1;
+    filter: blur(0);
   }
-
   100% {
-    left: 110%;
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
   }
-
 }
 
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-  .about-hero {
-    height: 540px;
-  }
-
-  .about-hero-content {
-    width: 88%;
-  }
-
-  .about-title {
-    font-size: 46px;
-  }
-
+/* Shine sweep across letters */
+@keyframes shineSweep {
+  0%   { background-position: -100% 0; }
+  50%  { background-position: 200% 0; }
+  100% { background-position: 200% 0; }
 }
 
+/* ---------- HOVER EFFECT on Title ---------- */
 
-/* =========================================================
-   MOBILE
-========================================================= */
+.about-title:hover .letter {
+  color: #03ea04;
+  text-shadow:
+    0 0 15px rgba(3, 234, 4, 0.9),
+    0 0 35px rgba(3, 234, 4, 0.6),
+    0 0 60px rgba(3, 234, 4, 0.35);
+  transform: translateY(-6px) scale(1.08);
+}
 
-@media (max-width: 600px) {
+/* ---------- GLOW PULSE (under title) ---------- */
 
-  .about-hero {
-    height: 460px;
+.about-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #03ea04, transparent);
+  border-radius: 2px;
+  opacity: 0.7;
+  animation: underlinePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(3, 234, 4, 0.5);
+    opacity: 0.5;
+    transform: scaleX(0.85);
   }
-
-  .about-hero-video {
-    object-position: center;
+  50% {
+    box-shadow: 0 0 25px rgba(3, 234, 4, 0.95);
+    opacity: 1;
+    transform: scaleX(1);
   }
-
-  .about-hero-overlay {
-
-    background:
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.78),
-        rgba(0, 0, 0, 0.42)
-      );
-  }
-
-  .about-hero-content {
-
-    width: 88%;
-
-    padding-top: 50px;
-  }
-
-  .about-title {
-    font-size: 38px;
-  }
-
-  .about-breadcrumb {
-
-    margin-top: 28px;
-
-    font-size: 14px;
-  }
-
 }
