@@ -5,66 +5,86 @@
 .our-story {
   position: relative;
   width: 100%;
-  padding: 120px 5% 160px;
+  padding: 120px 5% 220px;
   background: #050505;
   overflow: hidden;
+  font-family: Arial, sans-serif;
   isolation: isolate;
 }
 
 /* =========================================================
+   GREEN RADIAL GLOW (Background)
+========================================================= */
+
+.our-story::before {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(3, 234, 4, 0.08),
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: glowFloat 10s ease-in-out infinite;
+}
+
+@keyframes glowFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(60px, -30px) scale(1.15); }
+}
+
+/* =========================================================
    BACKGROUND WATERMARK — "OUR MISSION"
+   ✅ N cut nahi hoga
 ========================================================= */
 
 .our-story-watermark {
   position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 20px;
+  left: 0;
+  right: 0;
+
   width: 100%;
+  padding: 0 30px;
+
   text-align: center;
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: clamp(80px, 18vw, 260px);
-  font-weight: 700;
-  letter-spacing: 8px;
+
+  font-family: Arial, sans-serif;
+  font-size: clamp(48px, 10vw, 130px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  line-height: 1;
   text-transform: uppercase;
+
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
-  white-space: nowrap;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
+
   pointer-events: none;
   user-select: none;
   z-index: 0;
-  opacity: 0;
-  animation: watermarkIn 2s ease-out 0.6s forwards;
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  animation: watermarkPulse 6s ease-in-out infinite;
 }
 
-@keyframes watermarkIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(40px);
-    letter-spacing: 20px;
+@keyframes watermarkPulse {
+  0%, 100% {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
+    text-shadow: none;
   }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    letter-spacing: 8px;
+  50% {
+    -webkit-text-stroke: 1px rgba(3, 234, 4, 0.35);
+    text-shadow: 0 0 40px rgba(3, 234, 4, 0.18);
   }
-}
-
-/* Watermark subtle glow pulse */
-.our-story-watermark::after {
-  content: "OUR MISSION";
-  position: absolute;
-  inset: 0;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(3, 234, 4, 0.15);
-  filter: blur(12px);
-  opacity: 0;
-  animation: watermarkGlow 5s ease-in-out infinite;
-}
-
-@keyframes watermarkGlow {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
 }
 
 /* =========================================================
@@ -97,7 +117,7 @@
 .our-story-tag {
   display: inline-block;
   color: #03ea04;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -105,6 +125,7 @@
   margin-bottom: 24px;
   position: relative;
   padding-left: 40px;
+  text-shadow: 0 0 12px rgba(3, 234, 4, 0.4);
 }
 
 .our-story-tag::before {
@@ -120,24 +141,30 @@
   border-radius: 2px;
 }
 
-/* Tag line pulse */
+/* Green dot pulse */
 .our-story-tag::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: -4px;
   top: 50%;
   transform: translateY(-50%);
-  width: 30px;
-  height: 2px;
+  width: 8px;
+  height: 8px;
   background: #03ea04;
-  border-radius: 2px;
-  opacity: 0.5;
-  animation: tagPulse 2.5s ease-in-out infinite;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
+  animation: dotPulse 2s ease-in-out infinite;
 }
 
-@keyframes tagPulse {
-  0%, 100% { transform: translateY(-50%) scaleX(1);   opacity: 0.5; }
-  50%      { transform: translateY(-50%) scaleX(1.6); opacity: 0; }
+@keyframes dotPulse {
+  0%, 100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.6);
+    opacity: 0.4;
+  }
 }
 
 /* ---------- HEADING ---------- */
@@ -145,20 +172,26 @@
 .our-story-heading {
   margin: 0;
   color: #ffffff;
-  font-family: "Times New Roman", Georgia, serif;
+  font-family: Arial, sans-serif;
   font-size: clamp(38px, 5.2vw, 72px);
-  font-weight: 700;
+  font-weight: 900;
   line-height: 1.05;
-  letter-spacing: 1px;
   text-transform: uppercase;
-  overflow: hidden;
+
+  /* letter-spacing open — ✅ tez */
+  letter-spacing: -2px;
+  transition: letter-spacing 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              text-shadow 0.4s ease;
 }
 
-/* Heading letters effect */
-.our-story-heading::first-line {
+.our-story-heading.in-view {
+  letter-spacing: -0.5px;
+}
+
+.our-story-heading:hover {
   text-shadow:
-    0 0 30px rgba(3, 234, 4, 0.15),
-    0 4px 20px rgba(0, 0, 0, 0.6);
+    0 0 20px rgba(3, 234, 4, 0.28),
+    0 0 40px rgba(3, 234, 4, 0.14);
 }
 
 /* =========================================================
@@ -172,7 +205,7 @@
 .our-story-para {
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 17px;
   line-height: 1.85;
   letter-spacing: 0.3px;
@@ -181,7 +214,7 @@
   padding-left: 22px;
 }
 
-/* Green vertical line before paragraph */
+/* Green vertical line — ✅ tez */
 .our-story-para::before {
   content: "";
   position: absolute;
@@ -192,46 +225,51 @@
   background: linear-gradient(180deg, #03ea04, transparent);
   border-radius: 3px;
   box-shadow: 0 0 14px rgba(3, 234, 4, 0.5);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.our-story-right.in-view .our-story-para::before {
+  transform: scaleY(1);
 }
 
 /* =========================================================
-   SCROLL REVEAL ANIMATIONS
+   ✨ SCROLL REVEAL — FASTER
 ========================================================= */
 
 .reveal {
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(60px);
+  filter: blur(8px);
   transition:
-    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
 }
 
 .reveal.in-view {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Stagger */
-.our-story-tag.reveal.in-view      { transition-delay: 0.05s; }
-.our-story-heading.reveal.in-view  { transition-delay: 0.20s; }
-.our-story-right.reveal.in-view    { transition-delay: 0.40s; }
-
-/* Heading ka 3D slide effect jab in-view ho */
-.our-story-heading {
-  opacity: 0;
-  transform: translateY(60px) rotateX(-30deg);
-  transform-origin: bottom;
-  filter: blur(6px);
-  transition:
-    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1s ease;
-}
-
-.our-story-heading.in-view {
-  opacity: 1;
-  transform: translateY(0) rotateX(0);
   filter: blur(0);
+}
+
+/* ---------- Stagger (tez) ---------- */
+
+.our-story-tag.reveal     { transition-delay: 0s; }
+.our-story-heading.reveal { transition-delay: 0.08s; }
+.our-story-right.reveal   { transition-delay: 0.16s; }
+
+/* ---------- Para clip-path reveal (tez) ---------- */
+
+.our-story-para {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.25s;
+}
+
+.our-story-right.in-view .our-story-para {
+  clip-path: inset(0 0 0 0);
 }
 
 /* =========================================================
@@ -240,7 +278,7 @@
 
 @media (max-width: 900px) {
   .our-story {
-    padding: 90px 5% 120px;
+    padding: 90px 5% 180px;
   }
 
   .our-story-container {
@@ -264,7 +302,7 @@
 
 @media (max-width: 600px) {
   .our-story {
-    padding: 70px 20px 100px;
+    padding: 70px 20px 140px;
   }
 
   .our-story-tag {
@@ -273,8 +311,7 @@
     padding-left: 32px;
   }
 
-  .our-story-tag::before,
-  .our-story-tag::after {
+  .our-story-tag::before {
     width: 22px;
   }
 
@@ -290,7 +327,9 @@
   }
 
   .our-story-watermark {
-    font-size: 90px;
-    letter-spacing: 4px;
+    font-size: 36px;
+    letter-spacing: 2px;
+    bottom: 10px;
+    padding: 0 15px;
   }
 }

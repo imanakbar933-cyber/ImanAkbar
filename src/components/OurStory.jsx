@@ -10,10 +10,12 @@ function OurStory() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("in-view");
+          } else {
+            entry.target.classList.remove("in-view");   // ✅ reset on scroll away
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     const elements = sectionRef.current.querySelectorAll(".reveal");
@@ -41,8 +43,8 @@ function OurStory() {
           </span>
 
           <h2 className="our-story-heading reveal">
-            THE GYMFREAK <br />
-            TNC JOURNEY
+            THE KINETIX <br />
+            JOURNEY
           </h2>
 
         </div>
@@ -50,7 +52,7 @@ function OurStory() {
         {/* ===== RIGHT SIDE ===== */}
         <div className="our-story-right reveal">
           <p className="our-story-para">
-            At GYMFreak TNC, we believe that fitness is not just a goal, but a
+            At KINETIX, we believe that fitness is not just a goal, but a
             way of life. Founded in [year], our gym was born out of a passion
             for health, wellness, and community. What started as a small fitness
             center has now grown into a thriving hub for fitness enthusiasts of
