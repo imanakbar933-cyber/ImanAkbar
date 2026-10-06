@@ -5,10 +5,13 @@
 .info-cards {
   position: relative;
   width: 100%;
-  padding: 100px 5%;
+  padding: 100px 5% 40px;
   background: #050505;
   font-family: Arial, sans-serif;
   overflow: hidden;
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
 }
 
 .info-cards-grid {
@@ -17,7 +20,7 @@
   gap: 40px;
   max-width: 1400px;
   margin: 0 auto;
-  perspective: 1200px;   /* 3D tilt ke liye */
+  perspective: 1200px;
 }
 
 /* =========================================================
@@ -31,7 +34,7 @@
 }
 
 /* =========================================================
-   CARD IMAGE — 3D TILT WRAPPER
+   CARD IMAGE — 3D TILT
 ========================================================= */
 
 .info-card-image {
@@ -53,21 +56,19 @@
     0 20px 50px rgba(0, 0, 0, 0.6);
 
   transform-style: preserve-3d;
-  transform: perspective(1000px)
-             rotateX(var(--rx))
-             rotateY(var(--ry));
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
   transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.6s ease,
-    border-color 0.6s ease;
+    transform 0.25s ease-out,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
 .info-card-image:hover {
   border-color: rgba(3, 234, 4, 0.6);
   box-shadow:
     0 0 0 1px rgba(3, 234, 4, 0.2),
-    0 0 40px rgba(3, 234, 4, 0.3),
-    0 30px 60px rgba(0, 0, 0, 0.7);
+    0 0 30px rgba(3, 234, 4, 0.25),
+    0 25px 50px rgba(0, 0, 0, 0.65);
 }
 
 .info-card-image img {
@@ -75,10 +76,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
-
-  /* Grayscale → color on hover */
   filter: grayscale(0.5) contrast(1.05) brightness(0.95);
-  transition: filter 0.7s ease, transform 0.7s ease;
+  transition: filter 0.4s ease, transform 0.4s ease;
 }
 
 .info-card-image:hover img {
@@ -87,7 +86,7 @@
 }
 
 /* =========================================================
-   GLITCH LAYER — RGB Split on Hover
+   GLITCH LAYER — Only on Hover
 ========================================================= */
 
 .glitch-layer {
@@ -100,12 +99,12 @@
     linear-gradient(90deg, rgba(255, 0, 80, 0.35), transparent 25%),
     linear-gradient(-90deg, rgba(0, 200, 255, 0.35), transparent 25%);
   mix-blend-mode: screen;
-  transition: opacity 0.4s ease;
-  animation: glitchShift 2s steps(6) infinite;
+  transition: opacity 0.3s ease;
 }
 
 .info-card-image:hover .glitch-layer {
   opacity: 1;
+  animation: glitchShift 1.2s steps(6) infinite;
 }
 
 @keyframes glitchShift {
@@ -117,7 +116,7 @@
 }
 
 /* =========================================================
-   SCAN LINE — Moving top → bottom
+   SCAN LINE — Only on Hover
 ========================================================= */
 
 .scan-line {
@@ -137,8 +136,13 @@
     transparent 100%
   );
   mix-blend-mode: screen;
-  animation: scanMove 4s ease-in-out infinite;
-  opacity: 0.85;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.info-card-image:hover .scan-line {
+  opacity: 0.9;
+  animation: scanMove 2.5s ease-in-out infinite;
 }
 
 @keyframes scanMove {
@@ -149,7 +153,7 @@
 }
 
 /* =========================================================
-   CURSOR SPOTLIGHT — Follows mouse
+   CURSOR SPOTLIGHT
 ========================================================= */
 
 .cursor-glow {
@@ -164,7 +168,7 @@
     transparent 55%
   );
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
 .info-card-image:hover .cursor-glow {
@@ -172,7 +176,7 @@
 }
 
 /* =========================================================
-   RIPPLE RING — Expands on Hover
+   RIPPLE RING — Only on Hover
 ========================================================= */
 
 .ripple-ring {
@@ -191,18 +195,12 @@
 }
 
 .info-card-image:hover .ripple-ring {
-  animation: rippleExpand 1.6s ease-out infinite;
+  animation: rippleExpand 1.2s ease-out infinite;
 }
 
 @keyframes rippleExpand {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(28);
-    opacity: 0;
-  }
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(28); opacity: 0; }
 }
 
 /* =========================================================
@@ -220,7 +218,7 @@
   );
   pointer-events: none;
   z-index: 1;
-  transition: background 0.6s ease;
+  transition: background 0.4s ease;
 }
 
 .info-card-image:hover .info-card-overlay {
@@ -255,18 +253,14 @@
   font-weight: 900;
   line-height: 1;
   letter-spacing: 1px;
-
   color: transparent;
   -webkit-text-stroke: 2px #03ea04;
-
   text-shadow:
     0 0 12px rgba(3, 234, 4, 0.5),
     0 0 30px rgba(3, 234, 4, 0.3);
-
   width: fit-content;
   padding: 0 4px;
-  animation: numberFloat 4s ease-in-out infinite;
-  transition: text-shadow 0.4s ease;
+  transition: text-shadow 0.3s ease;
 }
 
 .info-card-image:hover .info-card-number {
@@ -274,6 +268,7 @@
     0 0 20px rgba(3, 234, 4, 0.9),
     0 0 45px rgba(3, 234, 4, 0.6),
     0 0 80px rgba(3, 234, 4, 0.4);
+  animation: numberFloat 3s ease-in-out infinite;
 }
 
 @keyframes numberFloat {
@@ -288,7 +283,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-
   color: #ffffff;
   font-family: Arial, sans-serif;
   font-size: 22px;
@@ -296,7 +290,6 @@
   line-height: 1.25;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
@@ -318,25 +311,21 @@
 }
 
 /* =========================================================
-   ✨ SCROLL REVEAL
+   ✨ SCROLL REVEAL — NO BLUR
 ========================================================= */
 
 .card-animate {
   opacity: 0;
-  transform: translateY(60px);
-  filter: blur(8px);
+  transform: translateY(35px);
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.45s ease-out,
+    transform 0.45s ease-out;
   transition-delay: var(--delay, 0s);
-  will-change: transform, opacity, filter;
 }
 
 .card-animate.in-view {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 /* =========================================================
@@ -345,7 +334,7 @@
 
 @media (max-width: 900px) {
   .info-cards {
-    padding: 80px 5%;
+    padding: 80px 5% 30px;
   }
 
   .info-cards-grid {
@@ -368,12 +357,12 @@
 
 @media (max-width: 600px) {
   .info-cards {
-    padding: 60px 20px;
+    padding: 60px 20px 25px;
   }
 
   .info-card-image {
     aspect-ratio: 4 / 3;
-    transform: none !important;   /* mobile pe 3D tilt off */
+    transform: none !important;
   }
 
   .info-card-content {
@@ -398,12 +387,13 @@
     line-height: 1.7;
   }
 
-  /* Mobile pe scan aur glitch halka */
-  .scan-line {
-    animation-duration: 6s;
+  /* Mobile pe glitch/scan bilkul light */
+  .scan-line,
+  .glitch-layer {
+    display: none;
   }
 
-  .glitch-layer {
-    opacity: 0.3 !important;
+  .cursor-glow {
+    display: none;
   }
 }

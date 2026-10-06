@@ -5,7 +5,7 @@ function InfoCards() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // ===== Scroll Reveal =====
+    // ===== Scroll Reveal — turant trigger =====
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -16,7 +16,10 @@ function InfoCards() {
           }
         });
       },
-      { threshold: 0.15 }
+    {
+  threshold: 0,
+  rootMargin: "0px 0px 150px 0px",
+}
     );
 
     const elements = sectionRef.current.querySelectorAll(".card-animate");
@@ -33,7 +36,7 @@ function InfoCards() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -6;   // max 6deg
+      const rotateX = ((y - centerY) / centerY) * -6;
       const rotateY = ((x - centerX) / centerX) * 6;
 
       card.style.setProperty("--mx", `${(x / rect.width) * 100}%`);
@@ -84,7 +87,7 @@ function InfoCards() {
           <div
             className="info-card card-animate"
             key={i}
-            style={{ "--delay": `${i * 0.15}s` }}
+            style={{ "--delay": `${i * 0.08}s` }}
           >
             <div className="info-card-image">
               <img src={card.image} alt={card.title} />
@@ -98,7 +101,7 @@ function InfoCards() {
               {/* Cursor spotlight */}
               <div className="cursor-glow"></div>
 
-              {/* Ripple ring on hover */}
+              {/* Ripple ring */}
               <div className="ripple-ring"></div>
 
               <div className="info-card-overlay"></div>
@@ -107,7 +110,9 @@ function InfoCards() {
                 <span className="info-card-number">{card.number}</span>
                 <h3 className="info-card-title">
                   {card.title.split("\n").map((line, idx) => (
-                    <span key={idx} className="line">{line}</span>
+                    <span key={idx} className="line">
+                      {line}
+                    </span>
                   ))}
                 </h3>
               </div>

@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import "./index.css";   
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";              // 👈 Footer import
 import ScrollToTop from "./components/ScrollToTop";

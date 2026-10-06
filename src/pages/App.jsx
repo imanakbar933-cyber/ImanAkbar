@@ -23,7 +23,6 @@ function Home() {
       <About />
       {/* <Membership /> */}
       <Headlines /> 
-      <Footer />
       {/* <Login1 /> 
       <Login2 />
       <Login3 />

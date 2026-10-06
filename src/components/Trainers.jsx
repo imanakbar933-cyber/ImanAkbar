@@ -6,15 +6,15 @@ function Trainers() {
   const sectionRef = useRef(null);
 
   const trainersData = [
-    { id: 1, name: "HENRY ",    image: "/images/trainer1.jpg", role: "Strength Coach" },
-    { id: 2, name: "JAMES ",    image: "/images/trainer2.jpg", role: "HIIT Specialist" },
-    { id: 3, name: "MIKE ",  image: "/images/trainer3.jpg", role: "Bodybuilding Coach" },
-    { id: 4, name: "DAVID KHAN",      image: "/images/trainer4.jpg", role: "CrossFit Trainer" },
-    { id: 5, name: "ALEX BROWN",      image: "/images/trainer5.jpg", role: "Yoga & Mobility" },
+    { id: 1, name: "HENRY",        image: "/images/trainer1.jpg" },
+    { id: 2, name: "JAMES",        image: "/images/trainer2.jpg" },
+    { id: 3, name: "MIKE",         image: "/images/trainer3.jpg" },
+    { id: 4, name: "DAVID KHAN",   image: "/images/trainer4.jpg" },
+    { id: 5, name: "ALEX BROWN",   image: "/images/trainer5.jpg" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 3;
+  const visibleCount = 1;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,7 +27,10 @@ function Trainers() {
           }
         });
       },
-      { threshold: 0.15 }
+      {
+        threshold: 0,
+        rootMargin: "0px 0px 100px 0px",
+      }
     );
 
     const elements = sectionRef.current.querySelectorAll(".trainer-animate");
@@ -98,20 +101,13 @@ function Trainers() {
                 <div className="trainer-card-image">
                   <img src={trainer.image} alt={trainer.name} />
 
-                  {/* Moving neon sweep */}
                   <div className="trainer-sweep"></div>
-
-                  {/* Scan line */}
                   <div className="trainer-scan"></div>
-
-                  {/* Overlay */}
                   <div className="trainer-card-overlay"></div>
 
-                  {/* Content */}
                   <h3 className="trainer-card-name">{trainer.name}</h3>
                   <span className="trainer-card-arrow">↗</span>
 
-                  {/* Neon corners */}
                   <span className="t-corner t-tl"></span>
                   <span className="t-corner t-tr"></span>
                   <span className="t-corner t-bl"></span>

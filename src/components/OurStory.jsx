@@ -15,7 +15,7 @@ function OurStory() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.0 }
     );
 
     const elements = sectionRef.current.querySelectorAll(".reveal");

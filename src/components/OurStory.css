@@ -10,10 +10,13 @@
   overflow: hidden;
   font-family: Arial, sans-serif;
   isolation: isolate;
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
 }
 
 /* =========================================================
-   GREEN RADIAL GLOW (Background)
+   GREEN RADIAL GLOW
 ========================================================= */
 
 .our-story::before {
@@ -32,7 +35,7 @@
   filter: blur(60px);
   pointer-events: none;
   z-index: 0;
-  animation: glowFloat 10s ease-in-out infinite;
+  animation: glowFloat 12s ease-in-out infinite;
 }
 
 @keyframes glowFloat {
@@ -41,8 +44,7 @@
 }
 
 /* =========================================================
-   BACKGROUND WATERMARK — "OUR MISSION"
-   ✅ N cut nahi hoga
+   WATERMARK — "OUR MISSION"
 ========================================================= */
 
 .our-story-watermark {
@@ -50,30 +52,23 @@
   bottom: 20px;
   left: 0;
   right: 0;
-
   width: 100%;
   padding: 0 30px;
-
   text-align: center;
-
   font-family: Arial, sans-serif;
   font-size: clamp(48px, 10vw, 130px);
   font-weight: 900;
   letter-spacing: 3px;
   line-height: 1;
   text-transform: uppercase;
-
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
-
   pointer-events: none;
   user-select: none;
   z-index: 0;
-
   white-space: nowrap;
   overflow: hidden;
-
-  animation: watermarkPulse 6s ease-in-out infinite;
+  animation: watermarkPulse 8s ease-in-out infinite;
 }
 
 @keyframes watermarkPulse {
@@ -82,8 +77,10 @@
     text-shadow: none;
   }
   50% {
-    -webkit-text-stroke: 1px rgba(3, 234, 4, 0.35);
-    text-shadow: 0 0 40px rgba(3, 234, 4, 0.18);
+    -webkit-text-stroke: 1px rgba(3, 234, 4, 0.3);
+    text-shadow:
+      0 0 8px rgba(3, 234, 4, 0.2),
+      0 0 18px rgba(3, 234, 4, 0.1);
   }
 }
 
@@ -141,7 +138,6 @@
   border-radius: 2px;
 }
 
-/* Green dot pulse */
 .our-story-tag::after {
   content: "";
   position: absolute;
@@ -157,14 +153,8 @@
 }
 
 @keyframes dotPulse {
-  0%, 100% {
-    transform: translateY(-50%) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-50%) scale(1.6);
-    opacity: 0.4;
-  }
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
+  50%      { transform: translateY(-50%) scale(1.6); opacity: 0.4; }
 }
 
 /* ---------- HEADING ---------- */
@@ -177,8 +167,6 @@
   font-weight: 900;
   line-height: 1.05;
   text-transform: uppercase;
-
-  /* letter-spacing open — ✅ tez */
   letter-spacing: -2px;
   transition: letter-spacing 0.7s cubic-bezier(0.22, 1, 0.36, 1),
               text-shadow 0.4s ease;
@@ -195,7 +183,7 @@
 }
 
 /* =========================================================
-   RIGHT SIDE — PARAGRAPH
+   RIGHT SIDE
 ========================================================= */
 
 .our-story-right {
@@ -214,7 +202,6 @@
   padding-left: 22px;
 }
 
-/* Green vertical line — ✅ tez */
 .our-story-para::before {
   content: "";
   position: absolute;
@@ -235,34 +222,27 @@
 }
 
 /* =========================================================
-   ✨ SCROLL REVEAL — FASTER
+   ✨ SCROLL REVEAL — NO BLUR (smooth)
 ========================================================= */
 
 .reveal {
   opacity: 0;
-  transform: translateY(60px);
-  filter: blur(8px);
+  transform: translateY(40px);
   transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity, filter;
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
 }
 
 .reveal.in-view {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
-
-/* ---------- Stagger (tez) ---------- */
 
 .our-story-tag.reveal     { transition-delay: 0s; }
 .our-story-heading.reveal { transition-delay: 0.08s; }
 .our-story-right.reveal   { transition-delay: 0.16s; }
 
-/* ---------- Para clip-path reveal (tez) ---------- */
-
+/* Para clip-path reveal */
 .our-story-para {
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.25s;

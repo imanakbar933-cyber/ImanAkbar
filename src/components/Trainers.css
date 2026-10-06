@@ -5,7 +5,7 @@
 .trainers {
   position: relative;
   width: 100%;
-  padding: 100px 5%;
+  padding: 40px 5% 80px;
   background: #050505;
   font-family: Arial, sans-serif;
   overflow: hidden;
@@ -43,9 +43,10 @@
   position: relative;
   padding-left: 40px;
   text-shadow: 0 0 12px rgba(3, 234, 4, 0.5);
+
   opacity: 0;
   transform: translateX(-30px);
-  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+  transition: opacity 0.5s ease-out 0.05s, transform 0.5s ease-out 0.05s;
 }
 
 .trainers-left.in-view .trainers-tag {
@@ -66,7 +67,9 @@
   border-radius: 2px;
 }
 
-/* ---------- HEADING ---------- */
+/* =========================================================
+   HEADING — WORD 3D ANIMATION
+========================================================= */
 
 .trainers-heading {
   margin: 0;
@@ -74,52 +77,51 @@
   font-family: Arial, sans-serif;
   font-size: clamp(38px, 4.5vw, 64px);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .trainers-heading .line {
   display: block;
   overflow: hidden;
+  padding: 4px 0;
 }
 
 .trainers-heading .word {
   display: inline-block;
-  margin-right: 12px;
+  margin-right: 14px;
+
   opacity: 0;
-  transform: translateY(110%) rotateX(-60deg);
-  transform-origin: bottom;
-  filter: blur(6px);
+  transform: translateY(100%) rotateX(-70deg);
+  transform-origin: bottom center;
+
   transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(0.2s + (var(--i) * 0.1s));
+    opacity 0.6s ease-out,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(0.15s + (var(--i) * 0.15s));
 }
 
 .trainers-left.in-view .trainers-heading .word {
   opacity: 1;
   transform: translateY(0) rotateX(0);
-  filter: blur(0);
 }
 
 .trainers-heading .word.green {
   color: #03ea04;
   text-shadow:
-    0 0 20px rgba(3, 234, 4, 0.6),
-    0 0 40px rgba(3, 234, 4, 0.3);
+    0 0 18px rgba(3, 234, 4, 0.7),
+    0 0 40px rgba(3, 234, 4, 0.4);
 }
 
-/* Heading hover green glow */
 .trainers-heading:hover .word {
   text-shadow:
-    0 0 15px rgba(255, 255, 255, 0.4),
-    0 0 30px rgba(3, 234, 4, 0.35);
-  transition: text-shadow 0.5s ease;
+    0 0 18px rgba(3, 234, 4, 0.5),
+    0 0 40px rgba(3, 234, 4, 0.3);
+  transition: text-shadow 0.4s ease;
 }
 
 /* =========================================================
@@ -131,7 +133,7 @@
   gap: 12px;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s;
+  transition: opacity 0.5s ease-out 0.85s, transform 0.5s ease-out 0.85s;
 }
 
 .trainers-left.in-view .trainers-controls {
@@ -154,7 +156,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
-  transition: all 0.35s ease;
+  transition: all 0.3s ease-out;
 }
 
 .trainer-arrow::before {
@@ -163,7 +165,7 @@
   inset: 0;
   background: #03ea04;
   transform: translateY(101%);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.35s ease-out;
   z-index: -1;
 }
 
@@ -194,12 +196,11 @@
 .trainers-track {
   display: flex;
   gap: 20px;
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  transition: transform 0.6s ease-out;
 }
 
 /* =========================================================
-   TRAINER CARD
+   TRAINER CARD — STAGGER ANIMATION
 ========================================================= */
 
 .trainer-card {
@@ -207,6 +208,20 @@
   text-decoration: none;
   color: inherit;
   display: block;
+
+  /* ✅ Ek ke baad ek aayega */
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+  transition-delay: calc(var(--idx, 0) * 0.12s);
+}
+
+/* ✅ Jab slider in-view ho, sab cards reveal */
+.trainers-slider.in-view .trainer-card {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .trainer-card-image {
@@ -219,44 +234,35 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   transition:
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.6s ease,
-    border-color 0.6s ease;
+    transform 0.4s ease-out,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
 .trainer-card:hover .trainer-card-image {
   transform: translateY(-10px);
   border-color: rgba(3, 234, 4, 0.55);
   box-shadow:
-    0 0 35px rgba(3, 234, 4, 0.3),
-    0 30px 60px rgba(0, 0, 0, 0.75);
+    0 0 30px rgba(3, 234, 4, 0.25),
+    0 25px 50px rgba(0, 0, 0, 0.7);
 }
-
-/* ---------- IMAGE with Ken Burns ---------- */
 
 .trainer-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
+  transition: transform 0.5s ease-out, filter 0.5s ease-out;
   filter: brightness(0.95) saturate(1.05);
-  animation: trainerFloat 12s ease-in-out infinite alternate;
 }
 
-.trainer-card-image:hover img {
-  transform: scale(1.1);
+.trainer-card:hover .trainer-card-image img {
+  transform: scale(1.08);
   filter: brightness(1.05) saturate(1.15);
-  animation-play-state: paused;
-}
-
-@keyframes trainerFloat {
-  0%   { transform: scale(1)    translate(0, 0); }
-  100% { transform: scale(1.05) translate(-1%, -1%); }
 }
 
 /* =========================================================
-   ✨ NEON SWEEP (Green light across image)
+   NEON SWEEP
 ========================================================= */
 
 .trainer-sweep {
@@ -276,8 +282,13 @@
   transform: skewX(-18deg);
   z-index: 4;
   pointer-events: none;
-  animation: trainerSweep 6s ease-in-out infinite;
   mix-blend-mode: screen;
+  opacity: 0;
+}
+
+.trainer-card:hover .trainer-sweep {
+  opacity: 1;
+  animation: trainerSweep 3s ease-in-out infinite;
 }
 
 @keyframes trainerSweep {
@@ -287,7 +298,7 @@
 }
 
 /* =========================================================
-   ✨ SCAN LINE (Top → Bottom)
+   SCAN LINE
 ========================================================= */
 
 .trainer-scan {
@@ -307,7 +318,12 @@
     transparent 100%
   );
   mix-blend-mode: screen;
-  animation: trainerScan 5s ease-in-out infinite;
+  opacity: 0;
+}
+
+.trainer-card:hover .trainer-scan {
+  opacity: 1;
+  animation: trainerScan 2.5s ease-in-out infinite;
 }
 
 @keyframes trainerScan {
@@ -331,7 +347,7 @@
     transparent 55%,
     rgba(0, 0, 0, 0.85) 100%
   );
-  transition: background 0.6s ease;
+  transition: background 0.4s ease;
 }
 
 .trainer-card:hover .trainer-card-overlay {
@@ -360,8 +376,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  transform: translateY(0);
-  transition: transform 0.5s ease, color 0.4s ease;
+  transition: transform 0.4s ease, color 0.4s ease;
 }
 
 .trainer-card:hover .trainer-card-name {
@@ -392,7 +407,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s ease;
+  transition: all 0.35s ease-out;
 }
 
 .trainer-card:hover .trainer-card-arrow {
@@ -404,7 +419,7 @@
 }
 
 /* =========================================================
-   ✨ NEON CORNERS
+   NEON CORNERS
 ========================================================= */
 
 .t-corner {
@@ -417,33 +432,13 @@
   border-style: solid;
   border-width: 0;
   opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.t-tl {
-  top: 12px; left: 12px;
-  border-top-width: 2px; border-left-width: 2px;
-  transform: translate(-6px, -6px);
-  box-shadow: -2px -2px 10px rgba(3, 234, 4, 0.7);
-}
-.t-tr {
-  top: 12px; right: 12px;
-  border-top-width: 2px; border-right-width: 2px;
-  transform: translate(6px, -6px);
-  box-shadow: 2px -2px 10px rgba(3, 234, 4, 0.7);
-}
-.t-bl {
-  bottom: 12px; left: 12px;
-  border-bottom-width: 2px; border-left-width: 2px;
-  transform: translate(-6px, 6px);
-  box-shadow: -2px 2px 10px rgba(3, 234, 4, 0.7);
-}
-.t-br {
-  bottom: 12px; right: 12px;
-  border-bottom-width: 2px; border-right-width: 2px;
-  transform: translate(6px, 6px);
-  box-shadow: 2px 2px 10px rgba(3, 234, 4, 0.7);
-}
+.t-tl { top: 12px; left: 12px; border-top-width: 2px; border-left-width: 2px; transform: translate(-6px, -6px); }
+.t-tr { top: 12px; right: 12px; border-top-width: 2px; border-right-width: 2px; transform: translate(6px, -6px); }
+.t-bl { bottom: 12px; left: 12px; border-bottom-width: 2px; border-left-width: 2px; transform: translate(-6px, 6px); }
+.t-br { bottom: 12px; right: 12px; border-bottom-width: 2px; border-right-width: 2px; transform: translate(6px, 6px); }
 
 .trainer-card:hover .t-corner {
   opacity: 1;
@@ -451,23 +446,12 @@
 }
 
 /* =========================================================
-   ✨ SCROLL REVEAL
+   SECTION-LEVEL REVEAL
+   (sirf wrapper — content ke andar animations hain)
 ========================================================= */
 
 .trainer-animate {
-  opacity: 0;
-  transform: translateY(50px);
-  filter: blur(6px);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.trainer-animate.in-view {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+  /* Koi opacity nahi — bas container hai */
 }
 
 /* =========================================================
@@ -491,7 +475,7 @@
 
 @media (max-width: 600px) {
   .trainers {
-    padding: 70px 20px;
+    padding: 30px 20px 70px;
   }
 
   .trainers-heading {
@@ -499,7 +483,7 @@
   }
 
   .trainer-card {
-    flex: 0 0 calc((100% - 20px) / 2);
+    flex: 0 0 100%;
   }
 
   .trainer-card-name {
@@ -522,11 +506,8 @@
     font-size: 16px;
   }
 
-  .trainer-sweep {
-    animation-duration: 8s;
-  }
-
+  .trainer-sweep,
   .trainer-scan {
-    animation-duration: 7s;
+    display: none;
   }
 }
