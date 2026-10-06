@@ -5,7 +5,7 @@ function InfoCards() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // ===== Scroll Reveal — turant trigger =====
+    // ===== Scroll Reveal =====
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -16,10 +16,10 @@ function InfoCards() {
           }
         });
       },
-    {
-  threshold: 0,
-  rootMargin: "0px 0px 150px 0px",
-}
+      {
+        threshold: 0,
+        rootMargin: "0px 0px 150px 0px",
+      }
     );
 
     const elements = sectionRef.current.querySelectorAll(".card-animate");
@@ -87,23 +87,15 @@ function InfoCards() {
           <div
             className="info-card card-animate"
             key={i}
-            style={{ "--delay": `${i * 0.08}s` }}
+            style={{ "--idx": i }}
           >
             <div className="info-card-image">
               <img src={card.image} alt={card.title} />
 
-              {/* Glitch layer */}
               <div className="glitch-layer"></div>
-
-              {/* Scan line */}
               <div className="scan-line"></div>
-
-              {/* Cursor spotlight */}
               <div className="cursor-glow"></div>
-
-              {/* Ripple ring */}
               <div className="ripple-ring"></div>
-
               <div className="info-card-overlay"></div>
 
               <div className="info-card-content">

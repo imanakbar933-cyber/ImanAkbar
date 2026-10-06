@@ -9,9 +9,6 @@
   background: #050505;
   font-family: Arial, sans-serif;
   overflow: hidden;
-  contain: layout style;
-  content-visibility: auto;
-  contain-intrinsic-size: 700px;
 }
 
 .info-cards-grid {
@@ -261,6 +258,19 @@
   width: fit-content;
   padding: 0 4px;
   transition: text-shadow 0.3s ease;
+
+  /* ✅ Number ka apna reveal */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease-out 0.35s,
+    transform 0.5s ease-out 0.35s,
+    text-shadow 0.3s ease;
+}
+
+.info-card-image.in-view .info-card-number {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .info-card-image:hover .info-card-number {
@@ -295,6 +305,21 @@
 
 .info-card-title .line {
   display: block;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.info-card-image.in-view .info-card-title .line:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.45s;
+}
+
+.info-card-image.in-view .info-card-title .line:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
 }
 
 /* =========================================================
@@ -308,22 +333,44 @@
   font-size: 16px;
   line-height: 1.8;
   letter-spacing: 0.2px;
+
+  /* ✅ Description ka apna reveal */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.55s ease-out 0.55s,
+    transform 0.55s ease-out 0.55s;
+}
+
+.info-card.in-view .info-card-desc {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================================================
-   ✨ SCROLL REVEAL — NO BLUR
+   ✨ SCROLL REVEAL — Card Wrapper (Parent)
 ========================================================= */
 
 .card-animate {
-  opacity: 0;
-  transform: translateY(35px);
-  transition:
-    opacity 0.45s ease-out,
-    transform 0.45s ease-out;
-  transition-delay: var(--delay, 0s);
+  /* Wrapper pe kuch nahi — children apna animation rakhte hain */
+  opacity: 1;
+  transform: none;
 }
 
-.card-animate.in-view {
+/* =========================================================
+   IMAGE WRAPPER REVEAL (Card Image fade-in)
+========================================================= */
+
+.info-card-image {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  transition-delay: calc(var(--idx, 0) * 0.15s);
+}
+
+.info-card.in-view .info-card-image {
   opacity: 1;
   transform: translateY(0);
 }
@@ -387,12 +434,8 @@
     line-height: 1.7;
   }
 
-  /* Mobile pe glitch/scan bilkul light */
   .scan-line,
-  .glitch-layer {
-    display: none;
-  }
-
+  .glitch-layer,
   .cursor-glow {
     display: none;
   }
