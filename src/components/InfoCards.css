@@ -31,7 +31,7 @@
 }
 
 /* =========================================================
-   CARD IMAGE — 3D TILT
+   CARD IMAGE — 3D TILT + REVEAL
 ========================================================= */
 
 .info-card-image {
@@ -54,10 +54,19 @@
 
   transform-style: preserve-3d;
   transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
+
+  /* ✅ Image reveal */
+  opacity: 0;
   transition:
+    opacity 0.6s ease-out,
     transform 0.25s ease-out,
     box-shadow 0.4s ease,
     border-color 0.4s ease;
+  transition-delay: calc(var(--idx, 0) * 0.15s);
+}
+
+.info-card.in-view .info-card-image {
+  opacity: 1;
 }
 
 .info-card-image:hover {
@@ -257,9 +266,7 @@
     0 0 30px rgba(3, 234, 4, 0.3);
   width: fit-content;
   padding: 0 4px;
-  transition: text-shadow 0.3s ease;
 
-  /* ✅ Number ka apna reveal */
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -268,7 +275,8 @@
     text-shadow 0.3s ease;
 }
 
-.info-card-image.in-view .info-card-number {
+/* ✅ PARENT pe in-view check */
+.info-card.in-view .info-card-number {
   opacity: 1;
   transform: translateY(0);
 }
@@ -310,13 +318,14 @@
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.info-card-image.in-view .info-card-title .line:nth-child(1) {
+/* ✅ PARENT pe in-view check */
+.info-card.in-view .info-card-title .line:nth-child(1) {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.45s;
 }
 
-.info-card-image.in-view .info-card-title .line:nth-child(2) {
+.info-card.in-view .info-card-title .line:nth-child(2) {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.55s;
@@ -334,12 +343,11 @@
   line-height: 1.8;
   letter-spacing: 0.2px;
 
-  /* ✅ Description ka apna reveal */
   opacity: 0;
   transform: translateY(20px);
   transition:
-    opacity 0.55s ease-out 0.55s,
-    transform 0.55s ease-out 0.55s;
+    opacity 0.55s ease-out 0.65s,
+    transform 0.55s ease-out 0.65s;
 }
 
 .info-card.in-view .info-card-desc {
@@ -348,31 +356,12 @@
 }
 
 /* =========================================================
-   ✨ SCROLL REVEAL — Card Wrapper (Parent)
+   CARD WRAPPER (Parent)
 ========================================================= */
 
 .card-animate {
-  /* Wrapper pe kuch nahi — children apna animation rakhte hain */
   opacity: 1;
   transform: none;
-}
-
-/* =========================================================
-   IMAGE WRAPPER REVEAL (Card Image fade-in)
-========================================================= */
-
-.info-card-image {
-  opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
-  transition-delay: calc(var(--idx, 0) * 0.15s);
-}
-
-.info-card.in-view .info-card-image {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* =========================================================
