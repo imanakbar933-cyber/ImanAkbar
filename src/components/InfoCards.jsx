@@ -1,70 +1,7 @@
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import "./InfoCards.css";
 
 function InfoCards() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    // ===== Scroll Reveal =====
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-          } else {
-            entry.target.classList.remove("in-view");
-          }
-        });
-      },
-      {
-        threshold: 0,
-        rootMargin: "0px 0px 150px 0px",
-      }
-    );
-
-    const elements = sectionRef.current.querySelectorAll(".card-animate");
-    elements.forEach((el) => observer.observe(el));
-
-    // ===== 3D Tilt Effect =====
-    const tiltCards = sectionRef.current.querySelectorAll(".info-card-image");
-
-    const handleMove = (e) => {
-      const card = e.currentTarget;
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
-
-      card.style.setProperty("--mx", `${(x / rect.width) * 100}%`);
-      card.style.setProperty("--my", `${(y / rect.height) * 100}%`);
-      card.style.setProperty("--rx", `${rotateX}deg`);
-      card.style.setProperty("--ry", `${rotateY}deg`);
-    };
-
-    const handleLeave = (e) => {
-      const card = e.currentTarget;
-      card.style.setProperty("--rx", `0deg`);
-      card.style.setProperty("--ry", `0deg`);
-    };
-
-    tiltCards.forEach((card) => {
-      card.addEventListener("mousemove", handleMove);
-      card.addEventListener("mouseleave", handleLeave);
-    });
-
-    return () => {
-      observer.disconnect();
-      tiltCards.forEach((card) => {
-        card.removeEventListener("mousemove", handleMove);
-        card.removeEventListener("mouseleave", handleLeave);
-      });
-    };
-  }, []);
-
   const cardsData = [
     {
       number: "01",
@@ -80,14 +17,77 @@ function InfoCards() {
     },
   ];
 
+  // Container for stagger
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  // Card variants
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  // Number reveal
+  const numberVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.3 },
+    },
+  };
+
+  // Title lines
+  const titleLineVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+        delay: 0.4 + i * 0.1,
+      },
+    }),
+  };
+
+  // Description
+  const descVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.6 },
+    },
+  };
+
   return (
-    <section className="info-cards" ref={sectionRef}>
+    <section className="info-cards">
       <div className="info-cards-grid">
         {cardsData.map((card, i) => (
-          <div
-            className="info-card card-animate"
+          <motion.div
+            className="info-card"
             key={i}
-            style={{ "--idx": i }}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
           >
             <div className="info-card-image">
               <img src={card.image} alt={card.title} />
@@ -99,19 +99,44 @@ function InfoCards() {
               <div className="info-card-overlay"></div>
 
               <div className="info-card-content">
-                <span className="info-card-number">{card.number}</span>
+                <motion.span
+                  className="info-card-number"
+                  variants={numberVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                >
+                  {card.number}
+                </motion.span>
+
                 <h3 className="info-card-title">
                   {card.title.split("\n").map((line, idx) => (
-                    <span key={idx} className="line">
+                    <motion.span
+                      key={idx}
+                      className="line"
+                      custom={idx}
+                      variants={titleLineVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: false, amount: 0.2 }}
+                    >
                       {line}
-                    </span>
+                    </motion.span>
                   ))}
                 </h3>
               </div>
             </div>
 
-            <p className="info-card-desc">{card.desc}</p>
-          </div>
+            <motion.p
+              className="info-card-desc"
+              variants={descVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+            >
+              {card.desc}
+            </motion.p>
+          </motion.div>
         ))}
       </div>
     </section>

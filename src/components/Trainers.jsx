@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Trainers.css";
 
 function Trainers() {
-  const sectionRef = useRef(null);
-
   const trainersData = [
     { id: 1, name: "HENRY",        image: "/images/trainer1.jpg" },
     { id: 2, name: "JAMES",        image: "/images/trainer2.jpg" },
@@ -15,29 +14,6 @@ function Trainers() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCount = 1;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-          } else {
-            entry.target.classList.remove("in-view");
-          }
-        });
-      },
-      {
-        threshold: 0,
-        rootMargin: "0px 0px 100px 0px",
-      }
-    );
-
-    const elements = sectionRef.current.querySelectorAll(".trainer-animate");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
@@ -51,71 +27,118 @@ function Trainers() {
     );
   };
 
+  // Heading words data
+  const headingLines = [
+    ["THE", "FACES"],
+    ["BEHIND"],
+    ["KINETIX"],
+  ];
+
   return (
-    <section className="trainers" ref={sectionRef}>
+    <section className="trainers">
       <div className="trainers-container">
 
         {/* ===== LEFT SIDE ===== */}
-        <div className="trainers-left trainer-animate">
+        <div className="trainers-left">
 
-          <span className="trainers-tag">OUR TEAM</span>
+          {/* Tag */}
+          <motion.span
+            className="trainers-tag"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            OUR TEAM
+          </motion.span>
 
+          {/* Heading */}
           <h2 className="trainers-heading">
-            <span className="line">
-              <span className="word" style={{ "--i": 0 }}>THE</span>
-              <span className="word" style={{ "--i": 1 }}>FACES</span>
-            </span>
-            <span className="line">
-              <span className="word" style={{ "--i": 2 }}>BEHIND</span>
-            </span>
-            <span className="line">
-              <span className="word green" style={{ "--i": 3 }}>KINETIX</span>
-            </span>
+            {headingLines.map((line, lineIdx) => (
+              <span className="line" key={lineIdx}>
+                {line.map((word, wordIdx) => {
+                  const globalIdx = lineIdx * 2 + wordIdx;
+                  const isGreen = word === "KINETIX";
+                  return (
+                    <motion.span
+                      key={wordIdx}
+                      className={`word ${isGreen ? "green" : ""}`}
+                      initial={{ opacity: 0, y: "100%", rotateX: -70 }}
+                      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      transition={{
+                        duration: 0.6,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: 0.1 + globalIdx * 0.1,
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  );
+                })}
+              </span>
+            ))}
           </h2>
 
-          <div className="trainers-controls">
+          {/* Controls */}
+          <motion.div
+            className="trainers-controls"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.55 }}
+          >
             <button className="trainer-arrow" onClick={handlePrev} aria-label="Previous">
               ←
             </button>
             <button className="trainer-arrow" onClick={handleNext} aria-label="Next">
               →
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* ===== RIGHT SIDE — SLIDER ===== */}
-        <div className="trainers-slider trainer-animate">
-          <div
+        <div className="trainers-slider">
+          <motion.div
             className="trainers-track"
-            style={{
-              transform: `translateX(calc(-${currentIndex} * (100% / ${visibleCount} + 20px)))`,
+            animate={{
+              x: `calc(-${currentIndex} * (100% / ${visibleCount} + 20px))`,
             }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             {trainersData.map((trainer, idx) => (
-              <Link
-                to={`/trainers/${trainer.id}`}
-                className="trainer-card"
+              <motion.div
                 key={trainer.id}
-                style={{ "--idx": idx }}
+                className="trainer-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut",
+                  delay: idx * 0.1,
+                }}
               >
-                <div className="trainer-card-image">
-                  <img src={trainer.image} alt={trainer.name} />
+                <Link to={`/trainers/${trainer.id}`} className="trainer-card-link">
+                  <div className="trainer-card-image">
+                    <img src={trainer.image} alt={trainer.name} />
 
-                  <div className="trainer-sweep"></div>
-                  <div className="trainer-scan"></div>
-                  <div className="trainer-card-overlay"></div>
+                    <div className="trainer-sweep"></div>
+                    <div className="trainer-scan"></div>
+                    <div className="trainer-card-overlay"></div>
 
-                  <h3 className="trainer-card-name">{trainer.name}</h3>
-                  <span className="trainer-card-arrow">↗</span>
+                    <h3 className="trainer-card-name">{trainer.name}</h3>
+                    <span className="trainer-card-arrow">↗</span>
 
-                  <span className="t-corner t-tl"></span>
-                  <span className="t-corner t-tr"></span>
-                  <span className="t-corner t-bl"></span>
-                  <span className="t-corner t-br"></span>
-                </div>
-              </Link>
+                    <span className="t-corner t-tl"></span>
+                    <span className="t-corner t-tr"></span>
+                    <span className="t-corner t-bl"></span>
+                    <span className="t-corner t-br"></span>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
       </div>

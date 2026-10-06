@@ -31,7 +31,7 @@
 }
 
 /* =========================================================
-   CARD IMAGE — 3D TILT + REVEAL
+   CARD IMAGE
 ========================================================= */
 
 .info-card-image {
@@ -52,28 +52,16 @@
     0 0 0 1px rgba(3, 234, 4, 0.05),
     0 20px 50px rgba(0, 0, 0, 0.6);
 
-  transform-style: preserve-3d;
-  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
-
-  /* ✅ Image reveal */
-  opacity: 0;
   transition:
-    opacity 0.6s ease-out,
-    transform 0.25s ease-out,
-    box-shadow 0.4s ease,
-    border-color 0.4s ease;
-  transition-delay: calc(var(--idx, 0) * 0.15s);
-}
-
-.info-card.in-view .info-card-image {
-  opacity: 1;
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .info-card-image:hover {
   border-color: rgba(3, 234, 4, 0.6);
   box-shadow:
     0 0 0 1px rgba(3, 234, 4, 0.2),
-    0 0 30px rgba(3, 234, 4, 0.25),
+    0 0 25px rgba(3, 234, 4, 0.22),
     0 25px 50px rgba(0, 0, 0, 0.65);
 }
 
@@ -83,7 +71,7 @@
   object-fit: cover;
   display: block;
   filter: grayscale(0.5) contrast(1.05) brightness(0.95);
-  transition: filter 0.4s ease, transform 0.4s ease;
+  transition: filter 0.35s ease, transform 0.35s ease;
 }
 
 .info-card-image:hover img {
@@ -92,7 +80,7 @@
 }
 
 /* =========================================================
-   GLITCH LAYER — Only on Hover
+   GLITCH LAYER — only on hover
 ========================================================= */
 
 .glitch-layer {
@@ -102,27 +90,24 @@
   pointer-events: none;
   opacity: 0;
   background:
-    linear-gradient(90deg, rgba(255, 0, 80, 0.35), transparent 25%),
-    linear-gradient(-90deg, rgba(0, 200, 255, 0.35), transparent 25%);
-  mix-blend-mode: screen;
-  transition: opacity 0.3s ease;
+    linear-gradient(90deg, rgba(255, 0, 80, 0.3), transparent 25%),
+    linear-gradient(-90deg, rgba(0, 200, 255, 0.3), transparent 25%);
+  transition: opacity 0.25s ease;
 }
 
 .info-card-image:hover .glitch-layer {
   opacity: 1;
-  animation: glitchShift 1.2s steps(6) infinite;
+  animation: glitchShift 1.2s steps(4) infinite;
 }
 
 @keyframes glitchShift {
   0%, 100% { transform: translate(0, 0); }
-  20%      { transform: translate(-2px, 1px); }
-  40%      { transform: translate(2px, -1px); }
-  60%      { transform: translate(-1px, -1px); }
-  80%      { transform: translate(1px, 1px); }
+  33%      { transform: translate(-2px, 1px); }
+  66%      { transform: translate(2px, -1px); }
 }
 
 /* =========================================================
-   SCAN LINE — Only on Hover
+   SCAN LINE — only on hover
 ========================================================= */
 
 .scan-line {
@@ -141,9 +126,8 @@
     rgba(3, 234, 4, 0.10) 60%,
     transparent 100%
   );
-  mix-blend-mode: screen;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 .info-card-image:hover .scan-line {
@@ -153,8 +137,8 @@
 
 @keyframes scanMove {
   0%   { top: -25%; opacity: 0; }
-  10%  { opacity: 0.9; }
-  90%  { opacity: 0.9; }
+  15%  { opacity: 0.9; }
+  85%  { opacity: 0.9; }
   100% { top: 110%; opacity: 0; }
 }
 
@@ -169,12 +153,12 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mx) var(--my),
-    rgba(3, 234, 4, 0.28) 0%,
-    rgba(3, 234, 4, 0.08) 25%,
+    rgba(3, 234, 4, 0.25) 0%,
+    rgba(3, 234, 4, 0.06) 25%,
     transparent 55%
   );
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 .info-card-image:hover .cursor-glow {
@@ -182,7 +166,7 @@
 }
 
 /* =========================================================
-   RIPPLE RING — Only on Hover
+   RIPPLE RING — only on hover
 ========================================================= */
 
 .ripple-ring {
@@ -197,16 +181,16 @@
   opacity: 0;
   pointer-events: none;
   z-index: 5;
-  box-shadow: 0 0 20px rgba(3, 234, 4, 0.7);
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.6);
 }
 
 .info-card-image:hover .ripple-ring {
-  animation: rippleExpand 1.2s ease-out infinite;
+  animation: rippleExpand 1.5s ease-out infinite;
 }
 
 @keyframes rippleExpand {
   0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-  100% { transform: translate(-50%, -50%) scale(28); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(26); opacity: 0; }
 }
 
 /* =========================================================
@@ -224,7 +208,7 @@
   );
   pointer-events: none;
   z-index: 1;
-  transition: background 0.4s ease;
+  transition: background 0.35s ease;
 }
 
 .info-card-image:hover .info-card-overlay {
@@ -237,7 +221,7 @@
 }
 
 /* =========================================================
-   CONTENT (Number + Title)
+   CONTENT
 ========================================================= */
 
 .info-card-content {
@@ -254,6 +238,7 @@
 /* ---------- NUMBER ---------- */
 
 .info-card-number {
+  display: inline-block;
   font-family: Arial, sans-serif;
   font-size: 64px;
   font-weight: 900;
@@ -266,32 +251,14 @@
     0 0 30px rgba(3, 234, 4, 0.3);
   width: fit-content;
   padding: 0 4px;
-
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.5s ease-out 0.35s,
-    transform 0.5s ease-out 0.35s,
-    text-shadow 0.3s ease;
-}
-
-/* ✅ PARENT pe in-view check */
-.info-card.in-view .info-card-number {
-  opacity: 1;
-  transform: translateY(0);
+  transition: text-shadow 0.3s ease;
 }
 
 .info-card-image:hover .info-card-number {
   text-shadow:
-    0 0 20px rgba(3, 234, 4, 0.9),
-    0 0 45px rgba(3, 234, 4, 0.6),
-    0 0 80px rgba(3, 234, 4, 0.4);
-  animation: numberFloat 3s ease-in-out infinite;
-}
-
-@keyframes numberFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
+    0 0 18px rgba(3, 234, 4, 0.85),
+    0 0 40px rgba(3, 234, 4, 0.5),
+    0 0 70px rgba(3, 234, 4, 0.3);
 }
 
 /* ---------- TITLE ---------- */
@@ -313,22 +280,6 @@
 
 .info-card-title .line {
   display: block;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-/* ✅ PARENT pe in-view check */
-.info-card.in-view .info-card-title .line:nth-child(1) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.45s;
-}
-
-.info-card.in-view .info-card-title .line:nth-child(2) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.55s;
 }
 
 /* =========================================================
@@ -342,26 +293,6 @@
   font-size: 16px;
   line-height: 1.8;
   letter-spacing: 0.2px;
-
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.55s ease-out 0.65s,
-    transform 0.55s ease-out 0.65s;
-}
-
-.info-card.in-view .info-card-desc {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =========================================================
-   CARD WRAPPER (Parent)
-========================================================= */
-
-.card-animate {
-  opacity: 1;
-  transform: none;
 }
 
 /* =========================================================
@@ -370,12 +301,12 @@
 
 @media (max-width: 900px) {
   .info-cards {
-    padding: 80px 5% 30px;
+    padding: 70px 5% 30px;
   }
 
   .info-cards-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 50px;
   }
 
   .info-card-number {
@@ -393,12 +324,11 @@
 
 @media (max-width: 600px) {
   .info-cards {
-    padding: 60px 20px 25px;
+    padding: 50px 20px 25px;
   }
 
   .info-card-image {
     aspect-ratio: 4 / 3;
-    transform: none !important;
   }
 
   .info-card-content {
@@ -423,9 +353,11 @@
     line-height: 1.7;
   }
 
+  /* Mobile pe heavy hover effects off */
   .scan-line,
   .glitch-layer,
-  .cursor-glow {
+  .cursor-glow,
+  .ripple-ring {
     display: none;
   }
 }

@@ -43,15 +43,6 @@
   position: relative;
   padding-left: 40px;
   text-shadow: 0 0 12px rgba(3, 234, 4, 0.5);
-
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.5s ease-out 0.05s, transform 0.5s ease-out 0.05s;
-}
-
-.trainers-left.in-view .trainers-tag {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 .trainers-tag::before {
@@ -68,7 +59,7 @@
 }
 
 /* =========================================================
-   HEADING — WORD 3D ANIMATION
+   HEADING
 ========================================================= */
 
 .trainers-heading {
@@ -89,25 +80,12 @@
   display: block;
   overflow: hidden;
   padding: 4px 0;
+  perspective: 800px;
 }
 
 .trainers-heading .word {
   display: inline-block;
   margin-right: 14px;
-
-  opacity: 0;
-  transform: translateY(100%) rotateX(-70deg);
-  transform-origin: bottom center;
-
-  transition:
-    opacity 0.6s ease-out,
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(0.15s + (var(--i) * 0.15s));
-}
-
-.trainers-left.in-view .trainers-heading .word {
-  opacity: 1;
-  transform: translateY(0) rotateX(0);
 }
 
 .trainers-heading .word.green {
@@ -121,7 +99,7 @@
   text-shadow:
     0 0 18px rgba(3, 234, 4, 0.5),
     0 0 40px rgba(3, 234, 4, 0.3);
-  transition: text-shadow 0.4s ease;
+  transition: text-shadow 0.35s ease;
 }
 
 /* =========================================================
@@ -131,14 +109,6 @@
 .trainers-controls {
   display: flex;
   gap: 12px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out 0.85s, transform 0.5s ease-out 0.85s;
-}
-
-.trainers-left.in-view .trainers-controls {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .trainer-arrow {
@@ -165,7 +135,7 @@
   inset: 0;
   background: #03ea04;
   transform: translateY(101%);
-  transition: transform 0.35s ease-out;
+  transition: transform 0.3s ease-out;
   z-index: -1;
 }
 
@@ -196,32 +166,21 @@
 .trainers-track {
   display: flex;
   gap: 20px;
-  transition: transform 0.6s ease-out;
+  will-change: transform;
 }
 
 /* =========================================================
-   TRAINER CARD — STAGGER ANIMATION
+   TRAINER CARD
 ========================================================= */
 
 .trainer-card {
   flex: 0 0 calc((100% - 40px) / 3);
+}
+
+.trainer-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
-
-  /* ✅ Ek ke baad ek aayega */
-  opacity: 0;
-  transform: translateY(35px);
-  transition:
-    opacity 0.55s ease-out,
-    transform 0.55s ease-out;
-  transition-delay: calc(var(--idx, 0) * 0.12s);
-}
-
-/* ✅ Jab slider in-view ho, sab cards reveal */
-.trainers-slider.in-view .trainer-card {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .trainer-card-image {
@@ -234,16 +193,16 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   transition:
-    transform 0.4s ease-out,
-    box-shadow 0.4s ease,
-    border-color 0.4s ease;
+    transform 0.35s ease-out,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .trainer-card:hover .trainer-card-image {
   transform: translateY(-10px);
   border-color: rgba(3, 234, 4, 0.55);
   box-shadow:
-    0 0 30px rgba(3, 234, 4, 0.25),
+    0 0 30px rgba(3, 234, 4, 0.22),
     0 25px 50px rgba(0, 0, 0, 0.7);
 }
 
@@ -252,7 +211,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease-out, filter 0.5s ease-out;
+  transition: transform 0.45s ease-out, filter 0.45s ease-out;
   filter: brightness(0.95) saturate(1.05);
 }
 
@@ -262,7 +221,7 @@
 }
 
 /* =========================================================
-   NEON SWEEP
+   NEON SWEEP — only on hover
 ========================================================= */
 
 .trainer-sweep {
@@ -282,7 +241,6 @@
   transform: skewX(-18deg);
   z-index: 4;
   pointer-events: none;
-  mix-blend-mode: screen;
   opacity: 0;
 }
 
@@ -298,7 +256,7 @@
 }
 
 /* =========================================================
-   SCAN LINE
+   SCAN LINE — only on hover
 ========================================================= */
 
 .trainer-scan {
@@ -317,7 +275,6 @@
     rgba(3, 234, 4, 0.12) 55%,
     transparent 100%
   );
-  mix-blend-mode: screen;
   opacity: 0;
 }
 
@@ -347,7 +304,7 @@
     transparent 55%,
     rgba(0, 0, 0, 0.85) 100%
   );
-  transition: background 0.4s ease;
+  transition: background 0.35s ease;
 }
 
 .trainer-card:hover .trainer-card-overlay {
@@ -376,7 +333,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  transition: transform 0.4s ease, color 0.4s ease;
+  transition: transform 0.35s ease, color 0.35s ease;
 }
 
 .trainer-card:hover .trainer-card-name {
@@ -407,7 +364,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.35s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .trainer-card:hover .trainer-card-arrow {
@@ -432,7 +389,7 @@
   border-style: solid;
   border-width: 0;
   opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .t-tl { top: 12px; left: 12px; border-top-width: 2px; border-left-width: 2px; transform: translate(-6px, -6px); }
@@ -444,13 +401,6 @@
   opacity: 1;
   transform: translate(0, 0);
 }
-
-/* =========================================================
-   SECTION-LEVEL REVEAL
-   (sirf wrapper — content ke andar animations hain)
-========================================================= */
-
-
 
 /* =========================================================
    TABLET
