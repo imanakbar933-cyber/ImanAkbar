@@ -179,12 +179,13 @@ function Navbar() {
               Membership
             </a>
 
-            <a
-              href="#contact"
-              className="nav-link"
-            >
-              Contact
-            </a>
+          <Link
+  to="/contact"
+  className="nav-link"
+  onClick={() => setMenuOpen(false)}
+>
+  Contact
+</Link>
 
 
             {/* MOBILE JOIN BUTTON */}
