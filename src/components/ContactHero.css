@@ -10,9 +10,9 @@
   overflow: hidden;
   background: #000;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   isolation: isolate;
-  padding: 0 60px;
+  padding: 0 60px 70px 60px;
 }
 
 /* =========================================================
@@ -38,7 +38,7 @@
 }
 
 /* =========================================================
-   DARK OVERLAY (Left greenish-dark → Right light)
+   DARK OVERLAY
 ========================================================= */
 
 .contact-hero-overlay {
@@ -157,13 +157,12 @@
 }
 
 /* =========================================================
-   CONTACT TITLE — LETTER BY LETTER ANIMATION
+   CONTACT TITLE — SIMPLE (NO LETTER ANIMATION)
 ========================================================= */
 
 .contact-title {
   margin: 0;
-  display: inline-flex;
-  gap: 4px;
+  position: relative;
   color: #ffffff;
   font-family: "Times New Roman", Georgia, serif;
   font-size: 42px;
@@ -171,84 +170,40 @@
   line-height: 1;
   letter-spacing: 1px;
   text-transform: uppercase;
-  perspective: 800px;
   cursor: default;
-  position: relative;
-}
 
-/* ---------- Har Letter ---------- */
-
-.contact-title .letter {
-  display: inline-block;
-  position: relative;
+  /* 👇 seedha fade + slide in (ek hi baar, poora title) */
   opacity: 0;
-  transform: translateY(120%) rotateX(-90deg);
-  transform-origin: bottom center;
-  filter: blur(8px);
+  animation: contactTitleIn 0.8s ease 0.2s forwards;
 
-  animation: contactLetterReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: calc(0.25s + (var(--i) * 0.09s));
-
+  /* 👇 hover smooth */
   transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.35s ease;
 }
 
-/* Shine sweep per letter */
-.contact-title .letter::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(3, 234, 4, 0.6) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  background-position: -100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  pointer-events: none;
-  animation: contactShineSweep 3.5s ease-in-out infinite;
-  animation-delay: calc(1.2s + (var(--i) * 0.15s));
-}
-
-@keyframes contactLetterReveal {
+@keyframes contactTitleIn {
   0% {
     opacity: 0;
-    transform: translateY(120%) rotateX(-90deg);
-    filter: blur(8px);
-  }
-  60% {
-    opacity: 1;
-    filter: blur(0);
+    transform: translateY(30px);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) rotateX(0);
+    transform: translateY(0);
     filter: blur(0);
   }
 }
 
-@keyframes contactShineSweep {
-  0%   { background-position: -100% 0; }
-  50%  { background-position: 200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* ---------- HOVER EFFECT on Title ---------- */
-
-.contact-title:hover .letter {
+/* 👇 TITLE HOVER — Green + glow + lift */
+.contact-title:hover {
   color: #03ea04;
   text-shadow:
     0 0 15px rgba(3, 234, 4, 0.9),
     0 0 35px rgba(3, 234, 4, 0.6),
     0 0 60px rgba(3, 234, 4, 0.35);
-  transform: translateY(-6px) scale(1.08);
+  transform: translateY(-4px);
 }
 
-/* ---------- GLOW PULSE (under title) ---------- */
-
+/* 👇 GLOW PULSE (under title) */
 .contact-title::after {
   content: "";
   position: absolute;
@@ -288,7 +243,7 @@
   color: #d0d0d0;
   font-family: "Arial", "Helvetica", sans-serif;
   opacity: 0;
-  animation: contactBreadcrumbIn 0.9s ease 1.2s forwards;
+  animation: contactBreadcrumbIn 0.9s ease 0.6s forwards;
 }
 
 @keyframes contactBreadcrumbIn {
@@ -310,7 +265,6 @@
   display: inline-block;
 }
 
-/* Underline animation */
 .breadcrumb-home::after {
   content: "";
   position: absolute;
@@ -352,7 +306,7 @@
 @media (max-width: 1024px) {
   .contact-hero {
     height: 400px;
-    padding: 0 40px;
+    padding: 0 40px 60px 40px;
     margin-top: 70px;
   }
   .contact-title {
@@ -366,10 +320,8 @@
 @media (max-width: 768px) {
   .contact-hero {
     height: 340px;
-    padding: 0 24px;
+    padding: 0 24px 50px 24px;
     margin-top: 60px;
-    align-items: flex-end;
-    padding-bottom: 50px;
   }
   .contact-title {
     font-size: 26px;

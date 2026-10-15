@@ -36,12 +36,7 @@ function ContactHero() {
           ))}
         </h1>
 
-        {/* Breadcrumb */}
-        <p className="contact-hero-breadcrumb">
-          <span className="breadcrumb-home">HOME</span>
-          <span className="breadcrumb-separator"> / </span>
-          <span className="breadcrumb-current">CONTACT US</span>
-        </p>
+       
 
       </div>
 
